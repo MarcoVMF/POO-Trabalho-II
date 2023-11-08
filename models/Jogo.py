@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 import datetime
 
 
-
 class Jogo(ABC):
 
     def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
@@ -27,18 +26,28 @@ class Jogo(ABC):
     def estaDisponivel():
         pass
 
+
+    #Getter's e Setter's
+
+    @property
+    def codigo(self):
+        return self._codigo
+
+    @codigo.setter
+    def codigo(self, codigo):
+        self._codigo = codigo
+
     @property
     def nome(self):
         return self._nome
-        
-    
+
     @nome.setter
     def nome(self, nome):
         self._nome = nome
 
     @property
     def descricao(self):
-         return self._descricao
+        return self._descricao
 
     @descricao.setter
     def descricao(self, descricao):
@@ -51,7 +60,7 @@ class Jogo(ABC):
     @desenvolvedora.setter
     def desenvolvedora(self, desenvolvedora):
         self._desenvolvedora = desenvolvedora
-    
+
     @property
     def dataLancamento(self):
         return self._dataLancamento
@@ -67,7 +76,7 @@ class Jogo(ABC):
     @valor.setter
     def valor(self, valor):
         self._valor = valor
-    
+
     @property
     def requisitosMinimos(self):
         return self._requisitosMinimos
@@ -76,12 +85,37 @@ class Jogo(ABC):
     def requisitosMinimos(self, requisitosMinimos):
         self._requisitosMinimos = requisitosMinimos
 
+    @property
+    def avaliacao(self):
+        return self._avaliacao
 
-    #Getter's e Setter's
+    @avaliacao.setter
+    def avaliacao(self, avaliacao):
+        self._avaliacao = avaliacao
 
+    @property
+    def comentario(self):
+        return self._comentario
+
+    @comentario.setter
+    def comentario(self, comentario):
+        self._comentario = comentario
+
+    @property
+    def disponivel(self):
+        return self._disponivel
+
+    @disponivel.setter
+    def disponivel(self, disponivel):
+        self._disponivel = disponivel
+
+    #StringToString
+    def __str__(self):
+        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self._valor + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
 
 
 class Acao(Jogo):
+
     def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
         super.__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
 
@@ -90,8 +124,7 @@ class Acao(Jogo):
 
     #StringToString
     def __str__(self):
-        pass 
-
+        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
 
 
 class Aventura(Jogo):
@@ -103,10 +136,11 @@ class Aventura(Jogo):
 
     #StringToString
     def __str__(self):
-        pass 
+        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
 
 
 class RPG(Jogo):
+
     def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
         super.__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
 
@@ -115,8 +149,7 @@ class RPG(Jogo):
 
     #StringToString
     def __str__(self):
-        pass 
-
+        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
 
 
 class Esporte(Jogo):
@@ -128,8 +161,7 @@ class Esporte(Jogo):
 
     #StringToString
     def __str__(self):
-        pass 
-
+        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
 
 
 class Corrida(Jogo):
@@ -141,4 +173,4 @@ class Corrida(Jogo):
 
     #StringToString
     def __str__(self):
-        pass 
+        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
