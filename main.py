@@ -1,2 +1,0 @@
-print("KEEP CALM")
-

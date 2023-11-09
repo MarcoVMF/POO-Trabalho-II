@@ -1,3 +1,4 @@
+import random, string
 from abc import ABC, abstractmethod
 
 class Pagamento(ABC):
@@ -82,6 +83,12 @@ class Pix(Pagamento):
         return f"{pagamentoStr}\n" \
                f"Codigo Pix: {self.__codigoPix}"
 
+    def gerarCodigoPix(self):
+        size = 30
+        chars = string.ascii_uppercase + string.digits
+        return ''.join(random.choice(chars) for _ in range(size))
+
+
     @property
     def codigoPix(self):
         return self.__codigoPix
@@ -89,4 +96,3 @@ class Pix(Pagamento):
     @codigoPix.setter
     def codigoPix(self, codigoPix):
         self.__codigoPix = codigoPix
-

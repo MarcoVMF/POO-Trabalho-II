@@ -17,15 +17,15 @@ class Jogo(ABC):
         self._disponivel = disponivel
 
     @abstractmethod
-    def calcularValor():
+    def calcularValor(self):
         pass
 
-    def atualizarAvaliacao():
-        pass
+    def atualizarAvaliacao(self, avaliacaoNova):
+        self._avaliacao = avaliacaoNova
+        return self._avaliacao
         
-    def estaDisponivel():
-        pass
-
+    def estaDisponivel(self):
+        return self._disponivel
 
     #Getter's e Setter's
 
