@@ -11,15 +11,6 @@ class Usuario(ABC):
         self._cep = cep
         self._email = email
 
-    def __str__(self):
-        return f"Código do Usuário: {self._codigo}\n" \
-               f"Nome: {self._nome}\n" \
-               f"CPF: {self._cpf}\n" \ 
-               f"RG: {self._rg}\n" \
-               f"Data de Nascimento: {self._dataNascimento}\n" \
-               f"Endereço: {self._endereco}\n" \
-               f"CEP: {self._endereco}\n" \
-               f"Email: {self._email}"
 
     @property
     def codigo(self):
@@ -86,19 +77,13 @@ class Usuario(ABC):
         self._email = email
 
 
-class Client(Usuario):
+class Cliente(Usuario):
     def __init__(self, codigo, nome, cpf, rg, dataNascimento, endereco, cep, email, dataCadastro, nivel, clienteEpico):
         super().__init__(codigo, nome, cpf, rg, dataNascimento, endereco, cep, email)
         self._dataCadastro = dataCadastro
         self._nivel = nivel
         self._clienteEpico = clienteEpico
 
-    def __str__(self):
-        usuarioStr = super().__str__()
-        return f"{usuarioStr}\n" \ 
-               f"Data de Cadastro: {self._dataCadastro}\n" \
-               f"Nivel: {self._nivel}\n" \
-               f"Cliente Epico: {self._clienteEpico}"
 
     @property
     def dataCadastro(self):
@@ -131,13 +116,6 @@ class Gerente(Usuario):
         self._salaio = salario
         self._pis = pis
         self._dataAdmissao = dataAdmissao
-
-    def __str__(self):
-        usuarioStr = super().__str__()
-        return f"{usuarioStr}\n" \
-               f"Salario: {self._salaio}\n" \
-               f"PIS: {self._pis}\n" \
-               f"Data de Admissão: {self._dataAdmissao}"
 
     @property
     def salario(self):
