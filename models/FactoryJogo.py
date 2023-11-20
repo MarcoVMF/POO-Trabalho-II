@@ -14,4 +14,3 @@ class factoryJogo(Jogo):
             return Jogo.Corrida(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
         else:
             raise ValueError("Invalid game type: {}".format(tipo))
-
