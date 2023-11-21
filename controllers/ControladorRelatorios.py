@@ -4,6 +4,7 @@ class ControladorRelatorios:
     def __init__(self):
         self.__controladorJogo = ControladorJogo.ControladorJogo()
 
+    #
     def listarJogos(self, tipoJogo):
         conteudo = []
         jogos = self.__controladorJogo.recuperarJogos()

@@ -120,8 +120,7 @@ class Jogo(ABC):
 
     #StringToString
     def __str__(self):
-        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self._valor + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
-
+        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora} \nData de Lançamento: {self._dataLancamento} \nValor: {self._valor} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
 
 class Acao(Jogo):
 
@@ -129,11 +128,12 @@ class Acao(Jogo):
         super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return self.valor() * 0.0225
+        return 0.0225 * super().valor
 
     #StringToString
     def __str__(self):
-        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
+        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
+
 
 
 class Aventura(Jogo):
@@ -141,12 +141,11 @@ class Aventura(Jogo):
         super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return self.valor() * 0.055
+        return super().valor * 0.055
 
     #StringToString
     def __str__(self):
-        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
-
+        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
 
 class RPG(Jogo):
 
@@ -154,32 +153,30 @@ class RPG(Jogo):
         super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return self.valor() * 0.0375
+        return super().valor * 0.0375
 
     #StringToString
     def __str__(self):
-        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
-
+        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
 
 class Esporte(Jogo):
     def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
         super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return self.valor() * 0.0075
+        return super().valor * 0.0075
 
     #StringToString
     def __str__(self):
-        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
-
+        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
 
 class Corrida(Jogo):
     def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
         super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return self.valor() * 0.0725
+        return super().valor * 0.0725
 
     #StringToString
     def __str__(self):
-        return "Código: " + self._codigo + "\nNome: " + self._nome + "\nDescrição: " + self._descricao + "\nDesenvolvedora: " + self._desenvolvedora + "\nData de Lançamento: " + self._dataLancamento + "\nValor: " + self.calcularValor() + "\nRequisitos Mínimos: " + self._requisitosMinimos + "\nAvaliação: " + self._avaliacao + "\nComentário: " + self._comentario + "\nDisponível: " + self._disponivel
+        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
