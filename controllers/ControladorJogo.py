@@ -1,10 +1,12 @@
 from models import FactoryJogo, BancoDeDados, SistemaJogosEletronicos
+
 class ControladorJogo:
     def __init__(self):
         pass
 
     def criarJogo(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
         jogo = FactoryJogo.factoryJogo(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
+        return jogo
 
     def inserirJogo(self, jogo):
         if jogo != None:
@@ -20,3 +22,6 @@ class ControladorJogo:
 
     def recuperarJogo(self, codigo):
         return BancoDeDados.BancoDeDados.recuperarJogo(codigo)
+
+    def recuperarJogos(self):
+        return BancoDeDados.BancoDeDados.recuperarJogos()

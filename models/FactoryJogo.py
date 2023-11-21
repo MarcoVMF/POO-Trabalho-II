@@ -1,6 +1,6 @@
 import models.Jogo as Jogo
 
-class factoryJogo(Jogo):
+class factoryJogo:
     def factoryJogo(self, tipo, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
         if tipo == 'Acao':
             return Jogo.Acao(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)

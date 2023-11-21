@@ -1,5 +1,5 @@
 import sqlite3
-import Venda, Usuario, Transportadora, Desenvolvedora, Jogo
+import Usuario, Transportadora, Desenvolvedora, Jogo, Venda
 
 class BancoDeDados:
     def __init__(self):
