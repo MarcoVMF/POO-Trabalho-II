@@ -1,4 +1,4 @@
-import BancoDeDados
+from models import BancoDeDados
 
 class SistemaJogosEletronicos:
     def __init__(self):

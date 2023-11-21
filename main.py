@@ -3,15 +3,17 @@ from models import Jogo, BancoDeDados, Configuracao, Desenvolvedora, FactoryJogo
 from views import *
 
 
-jogoA = FactoryJogo.factoryJogo('Acao', 1, 'GTA V', 'Jogo de ação', 'Rockstar', '2013-09-17', 100, 'Windows 7 64 Bit Service Pack 1, Windows 8 64 Bit, Windows 8.1 64 Bit', 5, 'Muito bom', True)
-jogoB = FactoryJogo.factoryJogo('Acao', 2, 'GTA IV', 'Jogo de ação', 'Rockstar', '2008-12-02', 50, 'Windows Vista - Service Pack 1 / Windows XP - Service Pack 3', 4, 'Bom', True)
-jogoC = FactoryJogo.factoryJogo('Acao', 3, 'GTA III', 'Jogo de ação', 'Rockstar', '2002-05-20', 10, 'Windows 2000 / Windows XP', 3, 'Regular', True)
+jogoA = FactoryJogo.factoryJogo.factory('Acao', 1, 'GTA V', 'Jogo de ação', 'Rockstar', '17/09/2013', 100, 'Windows 7 64 Bit Service Pack 1, Windows 8 64 Bit, Windows 8.1 64 Bit', 5, 'Muito bom', True)
+jogoB = FactoryJogo.factoryJogo.factory('Acao', 2, 'GTA IV', 'Jogo de ação', 'Rockstar', '02/12/2008', 50, 'Windows Vista - Service Pack 1 / Windows XP - Service Pack 3', 4, 'Bom', True)
+jogoC = FactoryJogo.factoryJogo.factory('Acao', 3, 'GTA III', 'Jogo de ação', 'Rockstar', '20/05/2002', 10, 'Windows 2000 / Windows XP', 3, 'Regular', True)
 
 
-BancoDeDados.BancoDeDados()
-BancoDeDados.BancoDeDados.inserirJogo(jogoA)
-BancoDeDados.BancoDeDados.inserirJogo(jogoB)
-BancoDeDados.BancoDeDados.inserirJogo(jogoC)
+bd = BancoDeDados.BancoDeDados()
 
-ControladorRelatorios.ControladorRelatorios.listarJogosMaisCaros()
+bd.inserirJogo(jogoA)
+bd.inserirJogo(jogoB)
+bd.inserirJogo(jogoC)
+
+controlador = ControladorRelatorios.ControladorRelatorios()
+jogos_acao = controlador.listarJogos(Jogo.Acao)
 

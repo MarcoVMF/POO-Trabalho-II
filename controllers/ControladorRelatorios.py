@@ -1,9 +1,8 @@
-import ControladorJogo
+from controllers import ControladorJogo
 
 class ControladorRelatorios:
     def __init__(self):
         self.__controladorJogo = ControladorJogo.ControladorJogo()
-
 
     def listarJogos(self, tipoJogo):
         conteudo = []
@@ -35,6 +34,7 @@ class ControladorRelatorios:
             content.push(arr[i])
 
         return content
+
     def listasJogosMaisBaratos(self):
         content = []
         arr = self.ordenacao()

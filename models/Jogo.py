@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-import datetime
+from datetime import datetime
 
 
 class Jogo(ABC):
 
-    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
+    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
         self._codigo = codigo
         self._nome = nome
         self._descricao = descricao
@@ -15,6 +15,7 @@ class Jogo(ABC):
         self._avaliacao = avaliacao
         self._comentario = comentario
         self._disponivel = disponivel
+        self._tipo = tipo
 
     @abstractmethod
     def calcularValor(self):
@@ -32,6 +33,14 @@ class Jogo(ABC):
     @property
     def codigo(self):
         return self._codigo
+
+    @property
+    def tipo(self):
+        return self._tipo
+
+    @tipo.setter
+    def tipo(self, tipo):
+        self._tipo = tipo
 
     @codigo.setter
     def codigo(self, codigo):
@@ -116,8 +125,8 @@ class Jogo(ABC):
 
 class Acao(Jogo):
 
-    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
-        super.__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
+    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
+        super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
         return self.valor() * 0.0225
@@ -128,8 +137,8 @@ class Acao(Jogo):
 
 
 class Aventura(Jogo):
-    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
-        super.__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
+    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
+        super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
         return self.valor() * 0.055
@@ -141,8 +150,8 @@ class Aventura(Jogo):
 
 class RPG(Jogo):
 
-    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
-        super.__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
+    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
+        super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
         return self.valor() * 0.0375
@@ -153,8 +162,8 @@ class RPG(Jogo):
 
 
 class Esporte(Jogo):
-    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
-        super.__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
+    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
+        super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
         return self.valor() * 0.0075
@@ -165,8 +174,8 @@ class Esporte(Jogo):
 
 
 class Corrida(Jogo):
-    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
-        super.__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
+    def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo):
+        super().__init__(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel, tipo)
 
     def calcularValor(self):
         return self.valor() * 0.0725
