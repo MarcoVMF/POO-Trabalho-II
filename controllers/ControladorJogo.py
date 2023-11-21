@@ -1,8 +1,9 @@
 from models import FactoryJogo, BancoDeDados, SistemaJogosEletronicos
 
 class ControladorJogo:
-    def __init__(self):
-        self.__bancodedados = BancoDeDados.BancoDeDados()
+    def __init__(self, sistema):
+        self.__banco_de_dados = BancoDeDados.BancoDeDados()
+        self.__sistema = sistema
 
     @staticmethod
     def criarJogo(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
@@ -12,21 +13,21 @@ class ControladorJogo:
 
     def inserirJogo(self, jogo):
         if jogo != None:
-            self.__bancodedados.inserirJogo(jogo)
-            SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+            self.__banco_de_dados.inserirJogo(jogo)
+            self.__sistema.atualizarDados()
         else:
             exception = ValueError("Invalid game: {}".format(jogo))
             raise exception
 
 
     def removerJogo(self, codigo):
-        self.__bancodedados.removerJogo(codigo)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__banco_de_dados.removerJogo(codigo)
+        self.__sistema.atualizarDados()
 
 
     def recuperarJogo(self, codigo):
-        return self.__bancodedados.recuperarJogo(codigo)
+        return self.__banco_de_dados.recuperarJogo(codigo)
 
 
     def recuperarJogos(self):
-        return self.__bancodedados.recuperarJogos()
+        return self.__banco_de_dados.recuperarJogos()

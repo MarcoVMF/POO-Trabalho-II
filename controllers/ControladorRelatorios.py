@@ -1,10 +1,10 @@
 from controllers import ControladorJogo
 
 class ControladorRelatorios:
-    def __init__(self):
-        self.__controladorJogo = ControladorJogo.ControladorJogo()
+    def __init__(self, sistema):
+        self.__controladorJogo = ControladorJogo.ControladorJogo(sistema)
 
-    #
+    #Listar todos os jogos e todos os jogos de um tipo específico
     def listarJogos(self, tipoJogo):
         conteudo = []
         jogos = self.__controladorJogo.recuperarJogos()
@@ -14,6 +14,7 @@ class ControladorRelatorios:
 
         return conteudo
 
+    #Ordenação usada para listar os jogos mais caros e mais baratos
     def ordenacao(self):
         jogos = self.__controladorJogo.recuperarJogos()
         arr = jogos
@@ -28,19 +29,21 @@ class ControladorRelatorios:
 
         return arr
 
+    #Listar os 10 jogos mais caros
     def listarJogosMaisCaros(self):
         content = []
         arr = self.ordenacao()
-        for i in range(0, 10):
-            content.push(arr[i])
+        for i in range(len(arr)-1, len(arr)-11, -1):
+            content.append(arr[i])
 
         return content
 
+    #Listar os 10 jogos mais baratos
     def listasJogosMaisBaratos(self):
         content = []
         arr = self.ordenacao()
-        for i in range(len(arr)-10, len(arr)):
-            content.push(arr[i])
+        for i in range(0, 10):
+            content.append(arr[i])
 
         return content
 

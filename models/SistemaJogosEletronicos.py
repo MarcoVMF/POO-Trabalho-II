@@ -9,7 +9,7 @@ class SistemaJogosEletronicos:
         self.__bancoDeDados = BancoDeDados.BancoDeDados()
         self.__vendas = self.__bancoDeDados.recuperarVendas()
         self.__jogos = self.__bancoDeDados.recuperarJogos()
-        self.__desenvolvedora = self.__bancoDeDados.recuperarDesenvolvedora()
+        self.__desenvolvedora = self.__bancoDeDados.recuperarDesenvolvedoras()
         self.__transportadoras = self.__bancoDeDados.recuperarTransportadoras()
         self.__clientes = self.__bancoDeDados.recuperarClientes()
         self.__gerentes = self.__bancoDeDados.recuperarGerentes()

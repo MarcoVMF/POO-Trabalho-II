@@ -1,20 +1,22 @@
 from models import Transportadora, BancoDeDados, SistemaJogosEletronicos
 
-class ControladorTrabsportadora:
-    def __init__(self):
-        pass
+class ControladorTransportadora:
+    def __init__(self, sistema):
+        self.__bancodedados = BancoDeDados.BancoDeDados()
+        self.__sistema = sistema
 
     def criarTransportadora(self, codigo, cnpj, nome, email, telefone, endereco, tempoEntrega):
         transportadora = Transportadora.Transportadora(codigo, cnpj, nome, email, telefone, endereco, tempoEntrega)
+        return transportadora
 
     def inserirTransportadora(self, transportadora):
-        BancoDeDados.BancoDeDados.inserirTransportadora(transportadora)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__bancodedados.inserirTransportadora(transportadora)
+        self.__sistema.atualizarDados()
 
     def recuperarTransportadora(self, codigo):
-        BancoDeDados.BancoDeDados.recuperarTrasportadora(codigo)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__bancodedados.recuperarTrasportadora(codigo)
+        self.__sistema.atualizarDados()
 
     def removerTransportadora(self, codigo):
-        BancoDeDados.BancoDeDados.removerTransportadora(codigo)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__bancodedados.removerTransportadora(codigo)
+        self.__sistema.atualizarDados()

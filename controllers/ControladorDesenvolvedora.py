@@ -1,19 +1,21 @@
 from models import Desenvolvedora, BancoDeDados, SistemaJogosEletronicos
 
 class ControladorDesenvolvedora:
-    def __init__(self):
-        pass
+    def __init__(self, sistema):
+        self.__bancodedados = BancoDeDados.BancoDeDados()
+        self.__sistema = sistema
 
     def criarDesenvolvedora(self, codigo, cnpj, nome, email, site, redeSocial, endereco):
         desenvolvedora = Desenvolvedora.Desenvolvedora(codigo, cnpj, nome, email, site, redeSocial, endereco)
+        return desenvolvedora
 
     def inserirDesenvolvedora(self, desenvolvedora):
-        BancoDeDados.BancoDeDados.inserirDesenvolvedora(desenvolvedora)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__bancodedados.inserirDesenvolvedora(desenvolvedora)
+        self.__sistema.atualizarDados()
 
     def recuperarDesenvolvedora(self, codigo):
-        return BancoDeDados.BancoDeDados.recuperarDesenvolvedora(codigo)
+        return self.__bancodedados.recuperarDesenvolvedora(codigo)
 
     def removerDesenvolvedora(self, codigo):
-        BancoDeDados.BancoDeDados.removerDesenvolvedora(codigo)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__bancodedados.removerDesenvolvedora(codigo)
+        self.__sistema.atualizarDados()

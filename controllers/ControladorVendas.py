@@ -1,19 +1,21 @@
 from models import Venda, BancoDeDados, SistemaJogosEletronicos
 
 class ControladorVendas:
-    def __init__(self):
-        pass
+    def __init__(self, sistema):
+        self.__bancodedados = BancoDeDados.BancoDeDados()
+        self.__sistema = sistema
 
     def criarVenda(self, codigo, cliente, gerente, dataVenda, dataEntrega, itensVenda, possuiItensFisico, valorTotal, valorComDesconto, formaPagamento, transportadora):
         venda = Venda.Venda(codigo, cliente, gerente, dataVenda, dataEntrega, itensVenda, possuiItensFisico, valorTotal, valorComDesconto, formaPagamento, transportadora)
+        return venda
 
     def inserirVenda(self, venda):
-        BancoDeDados.BancoDeDados.inserirVenda(venda)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__bancodedados.inserirVenda(venda)
+        self.__sistema.atualizarDados()
 
     def recuperarVenda(self, codigo):
-        return BancoDeDados.BancoDeDados.recuperarVenda(codigo)
+        return self.__bancodedados.recuperarVenda(codigo)
 
     def removerVenda(self, codigo):
-        BancoDeDados.BancoDeDados.removerVenda(codigo)
-        SistemaJogosEletronicos.SistemaJogosEletronicos.atualizarDados()
+        self.__bancodedados.removerVenda(codigo)
+        self.__sistema.atualizarDados()
