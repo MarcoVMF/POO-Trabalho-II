@@ -1,6 +1,6 @@
 from models import Transportadora, BancoDeDados, SistemaJogosEletronicos
 
-class ControladorTrabsportadora():
+class ControladorTrabsportadora:
     def __init__(self):
         pass
 

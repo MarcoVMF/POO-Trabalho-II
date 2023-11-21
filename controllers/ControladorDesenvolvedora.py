@@ -1,6 +1,6 @@
 from models import Desenvolvedora, BancoDeDados, SistemaJogosEletronicos
 
-class ControladorDesenvolvedora():
+class ControladorDesenvolvedora:
     def __init__(self):
         pass
 
