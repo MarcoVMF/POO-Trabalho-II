@@ -1,4 +1,5 @@
 from controllers import ControladorJogo
+from models import Iterator
 
 class ControladorRelatorios:
     def __init__(self, sistema):
@@ -8,6 +9,7 @@ class ControladorRelatorios:
     def listarJogos(self, tipoJogo):
         conteudo = []
         jogos = self.__controladorJogo.recuperarJogos()
+        jogos = Iterator.Iterator(jogos)
         for jogo in jogos:
             if isinstance(jogo, tipoJogo):
                 conteudo.append(jogo)

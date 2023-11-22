@@ -1,5 +1,5 @@
 from controllers import ControladorRelatorios, ControladorJogo
-from models import Jogo, BancoDeDados, Configuracao, Desenvolvedora, FactoryJogo, ItemVenda, Pagamento, SistemaJogosEletronicos, Transportadora, Usuario, Venda
+from models import Jogo, BancoDeDados, Configuracao, Desenvolvedora, FactoryJogo, ItemVenda, Pagamento, SistemaJogosEletronicos, Transportadora, Usuario, Venda, Iterator
 from views import *
 
 
@@ -40,23 +40,6 @@ controlador_jogo.inserirJogo(jogoM)
 
 
 controlador = ControladorRelatorios.ControladorRelatorios(sistema)
-mais_caros = controlador.listarJogosMaisCaros()
-mais_baratos = controlador.listasJogosMaisBaratos()
+todos_jogos = controlador.listarJogos(Jogo.Jogo)
+todos_jogos = Iterator.Iterator(todos_jogos)
 
-aux = 1
-
-print("MAIS CAROS")
-
-for jogos in mais_caros:
-    print(f"{aux} - {jogos.nome} - {jogos.valor}")
-    print()
-    aux = aux + 1
-
-aux = 1
-
-print("MAIS BARATOS")
-
-for jogos in mais_baratos:
-    print(f"{aux} - {jogos.nome} - {jogos.valor}")
-    print()
-    aux = aux + 1
