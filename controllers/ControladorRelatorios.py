@@ -1,5 +1,6 @@
 from controllers import ControladorJogo
 from models import Iterator
+from controllers import OrdenacaoStrategy
 
 class ControladorRelatorios:
     def __init__(self, sistema):
@@ -48,4 +49,19 @@ class ControladorRelatorios:
             content.append(arr[i])
 
         return content
+
+    #Lista os jogos ordenados de forma crescente por nota de avaliação,
+    def listarJogosPorAvaliacao(self):
+        jogos = self.__controladorJogo.recuperarJogos()
+        arr = jogos
+        for i in range(len(jogos)):
+            min = i
+            for j in range(i + 1, len(jogos)):
+                aux1 = arr[min].avaliacao
+                aux2 = arr[j].avaliacao
+                if aux1 > aux2:
+                    min = j
+            arr[i], arr[min] = arr[min], arr[i]
+
+        return arr
 
