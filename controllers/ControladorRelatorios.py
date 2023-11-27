@@ -1,11 +1,10 @@
-from controllers import ControladorJogo, ControladorVendas, ControladorDesenvolvedora
-from models import Iterator, Pagamento
+from controllers import ControladorJogo
+from models import Iterator
+from controllers import OrdenacaoStrategy
 
 class ControladorRelatorios:
     def __init__(self, sistema):
         self.__controladorJogo = ControladorJogo.ControladorJogo(sistema)
-        self.__controladorVenda = ControladorVendas.ControladorVendas(sistema)
-        self.__controladorDesenvolvedora = ControladorDesenvolvedora.ControladorDesenvolvedora(sistema)
 
     #Listar todos os jogos e todos os jogos de um tipo específico
     def listarJogos(self, tipoJogo):
@@ -51,73 +50,18 @@ class ControladorRelatorios:
 
         return content
 
+    #Lista os jogos ordenados de forma crescente por nota de avaliação,
+    def listarJogosPorAvaliacao(self):
+        jogos = self.__controladorJogo.recuperarJogos()
+        arr = jogos
+        for i in range(len(jogos)):
+            min = i
+            for j in range(i + 1, len(jogos)):
+                aux1 = arr[min].avaliacao
+                aux2 = arr[j].avaliacao
+                if aux1 > aux2:
+                    min = j
+            arr[i], arr[min] = arr[min], arr[i]
 
-    # Terminar de implementar
-    def listarVendasLucroDesenvolvedora(self, mes, desenvolvedora):
-        vendas = self.__controladorVenda.recuperarVendas()
-        produtos = self.__controladorJogo.recuperarJogos()
-
-        lucro = 0
-        conteudo = ''
-
-        vendas = Iterator.Iterator(vendas)
-
-        for venda in vendas:
-            if venda.dataVenda.month == mes:
-                itens = venda.itensVenda
-
-                if isinstance(itens, list):
-                    itens = Iterator.Iterator(itens)
-
-                    for item in itens:
-                        for produto in produtos:
-
-                            if item.codigoProduto == produto.codigo:
-                                if produto.desenvolvedora.nome == desenvolvedora:
-                                    lucro = lucro + item.calcularTotal()
-                                    conteudo.join(venda.__str__)
-                                    conteudo.join('\n')
-                else:
-                    for produto in produtos:
-                        if itens.codigoProduto == produto.codigo:
-                            if produto.desenvolvedora.nome == desenvolvedora:
-                                lucro = lucro + itens.calcularTotal()
-                                conteudo.join(venda.__str__)
-                                conteudo.join('\n')
-
-        conteudo.join("Lucro total gerado:" + str(lucro))
-        return conteudo
-
-    def listarVendasPorBoleto(self):
-        vendas = self.__controladorVenda.recuperarVendas()
-        vendas = Iterator.Iterator(vendas)
-        content = []
-        for venda in vendas:
-            pagamento = venda.formaPagamento
-            if isinstance(pagamento, Pagamento.Boleto):
-                content.append(venda)
-
-        return content
-
-    def listarVendasPorCartaoCredito(self):
-        vendas = self.__controladorVenda.recuperarVendas()
-        vendas = Iterator.Iterator(vendas)
-        content = []
-        for venda in vendas:
-            pagamento = venda.formaPagamento
-            if isinstance(pagamento, Pagamento.CartaoCredito):
-                content.append(venda)
-
-        return content
-
-    def listarVendasPorPix(self):
-        vendas = self.__controladorVenda.recuperarVendas()
-        vendas = Iterator.Iterator(vendas)
-        content = []
-        for venda in vendas:
-            pagamento = venda.formaPagamento
-            if isinstance(pagamento, Pagamento.Pix):
-                content.append(venda)
-
-        return content
+        return arr
 
