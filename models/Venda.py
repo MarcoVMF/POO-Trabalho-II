@@ -1,10 +1,11 @@
+from datetime import datetime
 class Venda:
     def __init__(self, codigo, cliente, gerente, dataVenda, dataEntrega, itensVenda, possuiItensFisico, valorTotal, valorComDesconto, formaPagamento, transportadora):
         self.__codigo = codigo
         self.__cliente = cliente
         self.__gerente = gerente
-        self.__dataVenda = dataVenda
-        self.__dataEntrega = dataEntrega
+        self.__dataVenda = datetime.strptime(dataVenda, "%d/%m/%Y")
+        self.__dataEntrega = datetime.strptime(dataEntrega, "%d/%m/%Y")
         self.__itensVenda = itensVenda
         self.__possuiItensFisico = possuiItensFisico
         self.__valorTotal = valorTotal

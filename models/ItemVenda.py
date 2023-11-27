@@ -1,5 +1,6 @@
 class ItemVenda:
-    def __init__(self, codigoProduto, valor, quantidade):
+    def __init__(self, codigo, codigoProduto, valor, quantidade):
+        self.__codigo = codigo
         self.__codigoProduto = codigoProduto
         self.__valor = valor
         self.__quantidade = quantidade
@@ -8,6 +9,15 @@ class ItemVenda:
         return self.__valor * self.__quantidade
 
     #Getter's e Setter's
+
+    @property
+    def codigo(self):
+        return self.__codigo
+
+    @codigo.setter
+    def codigo(self, codigo):
+        self.__codigo = codigo
+
 
     @property
     def codigoProduto(self):

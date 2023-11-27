@@ -6,8 +6,8 @@ class ControladorJogo:
         self.__sistema = sistema
 
     @staticmethod
-    def criarJogo(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
-        jogo = FactoryJogo.factoryJogo(codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
+    def criarJogo(tipo, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel):
+        jogo = FactoryJogo.factoryJogo.factory(tipo, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao, comentario, disponivel)
         return jogo
 
 

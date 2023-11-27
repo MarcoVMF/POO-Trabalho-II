@@ -14,8 +14,10 @@ class ControladorTransportadora:
         self.__sistema.atualizarDados()
 
     def recuperarTransportadora(self, codigo):
-        self.__bancodedados.recuperarTrasportadora(codigo)
-        self.__sistema.atualizarDados()
+        return self.__bancodedados.recuperarTrasportadora(codigo)
+
+    def recuperarTransportadoras(self):
+        return self.__bancodedados.recuperarTransportadoras()
 
     def removerTransportadora(self, codigo):
         self.__bancodedados.removerTransportadora(codigo)

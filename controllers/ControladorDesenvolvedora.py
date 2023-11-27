@@ -16,6 +16,9 @@ class ControladorDesenvolvedora:
     def recuperarDesenvolvedora(self, codigo):
         return self.__bancodedados.recuperarDesenvolvedora(codigo)
 
+    def recuperarDesenvolvedoras(self):
+        return self.__bancodedados.recuperarDesenvolvedoras()
+
     def removerDesenvolvedora(self, codigo):
         self.__bancodedados.removerDesenvolvedora(codigo)
         self.__sistema.atualizarDados()

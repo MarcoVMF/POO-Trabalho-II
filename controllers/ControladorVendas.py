@@ -16,6 +16,9 @@ class ControladorVendas:
     def recuperarVenda(self, codigo):
         return self.__bancodedados.recuperarVenda(codigo)
 
+    def recuperarVendas(self):
+        return self.__bancodedados.recuperarVendas()
+
     def removerVenda(self, codigo):
         self.__bancodedados.removerVenda(codigo)
         self.__sistema.atualizarDados()

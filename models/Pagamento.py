@@ -2,23 +2,23 @@ import random, string
 from abc import ABC, abstractmethod
 
 class Pagamento(ABC):
-    def __init__(self, codigoNota):
-        self.__codigoNota = codigoNota
+    def __init__(self, codigo):
+        self.__codigo = codigo
 
     def __str__(self):
-        return f"Codigo da Nota: {self.__codigoNota}"
+        return f"Codigo da Nota: {self.codigo}"
 
     @property
-    def codigoNota(self):
-        return self.__codigoNota
+    def codigo(self):
+        return self.__codigo
 
-    @codigoNota.setter
-    def codigoNota(self, codigoNota):
-        self.__codigoNota = codigoNota
+    @codigo.setter
+    def codigo(self, codigoNota):
+        self.__codigo = codigoNota
 
 class Boleto(Pagamento):
-    def __init__(self, codigoNota, numero):
-        super().__init__(codigoNota)
+    def __init__(self, codigo, numero):
+        super().__init__(codigo)
         self.__numero = numero
 
     def __str__(self):
@@ -36,8 +36,8 @@ class Boleto(Pagamento):
 
 class CartaoCredito(Pagamento):
 
-    def __init__(self, codigoNota, nome, bandeira, numero):
-        super().__init__(codigoNota)
+    def __init__(self, codigo, nome, bandeira, numero):
+        super().__init__(codigo)
         self.__nome = nome
         self.__bandeira = bandeira
         self.__numero = numero
@@ -74,8 +74,8 @@ class CartaoCredito(Pagamento):
         self.__numero = numero
 
 class Pix(Pagamento):
-    def __init__(self, codigoNota, codigoPix):
-        super().__init__(codigoNota)
+    def __init__(self, codigo, codigoPix):
+        super().__init__(codigo)
         self.__codigoPix = codigoPix
 
     def __str__(self):

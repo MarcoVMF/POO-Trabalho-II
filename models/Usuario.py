@@ -11,7 +11,6 @@ class Usuario(ABC):
         self._cep = cep
         self._email = email
 
-
     @property
     def codigo(self):
         return self._codigo
@@ -76,13 +75,18 @@ class Usuario(ABC):
     def email(self, email):
         self._email = email
 
+    #StringToString
+    def __str__(self):
+        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\n"
+
 
 class Cliente(Usuario):
-    def __init__(self, codigo, nome, cpf, rg, dataNascimento, endereco, cep, email, dataCadastro, nivel, clienteEpico):
+    def __init__(self, codigo, nome, cpf, rg, dataNascimento, endereco, cep, email, dataCadastro, nivel, clienteEpico, pagamento):
         super().__init__(codigo, nome, cpf, rg, dataNascimento, endereco, cep, email)
         self._dataCadastro = dataCadastro
         self._nivel = nivel
         self._clienteEpico = clienteEpico
+        self._pagamento = pagamento
 
 
     @property
@@ -109,17 +113,28 @@ class Cliente(Usuario):
     def clienteEpico(self, clienteEpico):
         self._clienteEpico = clienteEpico
 
+    @property
+    def pagamento(self):
+        return self._pagamento
+
+    @pagamento.setter
+    def pagamento(self, pagamento):
+        self._pagamento = pagamento
+
+    #StringToString
+    def __str__(self):
+        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\nData de Cadastro: {self._dataCadastro}\nNível: {self._nivel}\nCliente Épico: {self._clienteEpico}\nPagamento: {str(self._pagamento)}\n"
 
 class Gerente(Usuario):
     def __init__(self, codigo, nome, cpf, rg, dataNascimento, endereco, cep, email, salario, pis, dataAdmissao):
         super().__init__(codigo, nome, cpf, rg, dataNascimento, endereco, cep, email)
-        self._salaio = salario
+        self._salario = salario
         self._pis = pis
         self._dataAdmissao = dataAdmissao
 
     @property
     def salario(self):
-        return self._salaio
+        return self._salario
 
     @property
     def pis(self):
@@ -141,5 +156,6 @@ class Gerente(Usuario):
     def dataAdmissao(self, dataAdmissao):
         self._dataAdmissao = dataAdmissao
 
-
-
+    #StringToString
+    def __str__(self):
+        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\nSalário: {self._salario}\nPIS: {self._pis}\nData de Admissão: {self._dataAdmissao}\n"

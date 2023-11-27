@@ -69,4 +69,4 @@ class Desenvolvedora:
 
     #StringToString
     def __str__(self):
-        return f'Código: {self.__codigo}\nCNPJ: {self.__cnpj}\nNome: {self.__nome}\nEmail: {self.__email}\nSite: {self.__site}\nRede social: {self.__redeSocial}\nEndereço: {self.__endereco}'
+        return f'\nCódigo: {self.__codigo}\nCNPJ: {self.__cnpj}\nNome: {self.__nome}\nEmail: {self.__email}\nSite: {self.__site}\nRede social: {self.__redeSocial}\nEndereço: {self.__endereco}\n'
