@@ -51,7 +51,29 @@ class ControladorRelatorios:
 
         return content
 
-    def listar
+
+    #Listar jogos ordenados de forma crescente por nota de avaliação (Strategy)
+    def listarStrategy(self):
+        jogos = self.__controladorJogo.recuperarJogos()
+        return jogos
+
+
+    def listarTodasDesenvolvedoras(self):
+        desenvolvedoras = self.__controladorDesenvolvedora.recuperarDesenvolvedoras()
+        return desenvolvedoras
+
+    def listarDesevnlvedorasMaisJogosVendidos(self):
+        desenvolvedoras = self.__controladorDesenvolvedora.recuperarDesenvolvedoras()
+        desenvolvedoras = Iterator.Iterator(desenvolvedoras)
+        content = []
+        for desenvolvedora in desenvolvedoras:
+            content.append(desenvolvedora)
+
+        return content
+
+    def listarDesevolvedorasMaiorLucro(self):
+
+
 
 
     # Terminar de implementar
