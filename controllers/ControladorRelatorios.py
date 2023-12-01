@@ -43,13 +43,15 @@ class ControladorRelatorios:
         return content
 
     #Listar os 10 jogos mais baratos
-    def listasJogosMaisBaratos(self):
+    def listarJogosMaisBaratos(self):
         content = []
         arr = self.ordenacao()
         for i in range(0, 10):
             content.append(arr[i])
 
         return content
+
+    def listar
 
 
     # Terminar de implementar
