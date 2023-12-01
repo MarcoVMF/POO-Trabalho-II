@@ -1,6 +1,7 @@
+from controllers import OrdenacaoStrategy
 class Contexto:
     def __init__(self, estrategia):
         self._estrategia = estrategia
 
-    def executar(self, lista):
-        return self._estrategia.ordenar(lista)
+    def executar(self, recuperarJogos):
+        return self._estrategia.ordenar(recuperarJogos)
