@@ -1,4 +1,4 @@
-from controllers import ControladorRelatorios, ControladorJogo, ControladorDesenvolvedora, ControladorTransportadora, ControladorUsuario
+from controllers import ControladorRelatorios, ControladorJogo, ControladorDesenvolvedora, ControladorTransportadora, ControladorUsuario, ControladorVendas
 from models import Jogo, BancoDeDados, Configuracao, Desenvolvedora, FactoryJogo, ItemVenda, Pagamento, SistemaJogosEletronicos, Transportadora, Usuario, Venda, Iterator
 from views import *
 
@@ -27,8 +27,8 @@ controlador_transportadora.inserirTransportadora(transportadoraB)
 pagamentoA = Pagamento.CartaoCredito(1, 'Usuario A', 'Visa', '12345678910')
 pagamentoB = Pagamento.Boleto(2, '12345678910')
 
-usuarioA = controlador_usuario.criarCliente(1, 'Usuario A', '1234567', '131313-3', '20/04/2000', 'Rua UsuarioA', '12345678910', 'usuarioA@gmail', '20/05/2022', 'Nivel A', 1, pagamentoA)
-usuarioB = controlador_usuario.criarCliente(2, 'Usuario B', '9876543', '131313-3', '20/04/2000', 'Rua UsuarioB', '12345678910', 'usuarioB@gmail', '20/05/2022', 'Nivel B', 2, pagamentoB)
+usuarioA = controlador_usuario.criarCliente(1, 'Usuario A', '1234567', '131313-3', '20/04/2000', 'Rua UsuarioA', '12345678910', 'usuarioA@gmail', '20/05/2022', 0, 0, pagamentoA)
+usuarioB = controlador_usuario.criarCliente(2, 'Usuario B', '9876543', '131313-3', '20/04/2000', 'Rua UsuarioB', '12345678910', 'usuarioB@gmail', '20/05/2022', 0, 1, pagamentoB)
 gerenteA = controlador_usuario.criarGerente(1, 'Gerente A', '1234567', '131313-3', '20/04/2000', 'Rua GerenteA', '12345678910', 'gerenteA@gmail', '20/05/2022', 'Nivel A', 1)
 gerenteB = controlador_usuario.criarGerente(2, 'Gerente B', '9876543', '131313-3', '20/04/2000', 'Rua GerenteB', '12345678910', 'gerenteB@gmail', '20/05/2022', 'Nivel B', 2)
 
@@ -69,9 +69,40 @@ controlador_jogo.inserirJogo(jogoK)
 controlador_jogo.inserirJogo(jogoL)
 controlador_jogo.inserirJogo(jogoM)
 
-teste = view.tela(sistema)
-teste.createWindow('cadastrarCliente')
+controlador_vendas = ControladorVendas.ControladorVendas(sistema)
+
+itemVendaA = controlador_vendas.criarItemVenda(1, 1, 200, 1)
+itemVendaB = controlador_vendas.criarItemVenda(2, 10, 100, 1)
+itemVendaC = controlador_vendas.criarItemVenda(3, 11, 50, 1)
+
+controlador_vendas.inserirItemVenda(itemVendaA)
+controlador_vendas.inserirItemVenda(itemVendaB)
+controlador_vendas.inserirItemVenda(itemVendaC)
+
+vendaA = controlador_vendas.criarVenda(1, usuarioA, gerenteA, '20/05/2021', '20/05/2021', itemVendaA, False, 200, 200, pagamentoA, transportadoraA)
+vendaB = controlador_vendas.criarVenda(2, usuarioB, gerenteB, '20/05/2021', '20/05/2021', itemVendaB, False, 100, 100, pagamentoB, transportadoraB)
+vendaC = controlador_vendas.criarVenda(3, usuarioB, gerenteB, '20/05/2021', '20/05/2021', itemVendaC, False, 100, 100, pagamentoB, transportadoraB)
+
+
+controlador_vendas.inserirVenda(vendaA)
+controlador_vendas.inserirVenda(vendaB)
+controlador_vendas.inserirVenda(vendaC)
+
 
 controlador_relatorios = ControladorRelatorios.ControladorRelatorios(sistema)
+
+#controlador_relatorios.listarDesenvolvedorasMaisJogosVendidos()
+
+#controlador_relatorios.listarDesenvolvedorasMaisLucro()
+#lucro = controlador_relatorios.listarVendasLucroDesenvolvedora(5, desenvolvedoraA.nome)
+
+#print(controlador_relatorios.listarTransportadoras())
+#print(controlador_relatorios.listarGerentes())
+#print(controlador_relatorios.listarClientes())
+#print(controlador_relatorios.listarClientesEpicos())
+#print(controlador_relatorios.listarDezClientesMaiorNivel())
+#print(controlador_relatorios.listarHistoricoVendasCliente(usuarioA.codigo))
+#print(controlador_relatorios.todasVendas())
+print(controlador_relatorios.listarVendasLucroMes(5))
 
 jogos = controlador_relatorios.listarJogos(Jogo.Jogo)

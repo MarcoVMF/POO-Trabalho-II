@@ -8,8 +8,7 @@ class Transportadora:
         self.__endereco = endereco
         self.__tempoEntrega = tempoEntrega
 
-
-    #Getter's e Setter's
+    # Getter's e Setter's
     @property
     def codigo(self):
         return self.__codigo
@@ -66,7 +65,6 @@ class Transportadora:
     def tempoEntrega(self, tempoEntrega):
         self.__tempoEntrega = tempoEntrega
 
-    #StringToString
+    # StringToString
     def __str__(self):
         return f"Código: {self.codigo} \nCNPJ: {self.cnpj} \nNome: {self.nome} \nEmail: {self.email} \nTelefone: {self.telefone} \nEndereço: {self.endereco} \nTempo de Entrega: {self.tempoEntrega}\n"
-    
