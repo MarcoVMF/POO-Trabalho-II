@@ -82,7 +82,32 @@ class ControladorRelatorios:
 
             return desenvolvedoras_sorted
 
-    #def listarDesenvolvedorasMaiorLucro(self):
+   #Listar as 10 desenvolvedoras com maior lucro
+    def listarDesenvolvedorasMaiorLucro(self):
+        desenvolvedoras_lucro = {}
+        jogos = self.__controladorJogo.recuperarJogos()
+
+        for jogo in jogos:
+            desenvolvedora = jogo.desenvolvedora
+            lucro = self.__controladorJogo.recuperarLucro(jogo)
+
+            if desenvolvedora not in desenvolvedoras_lucro:
+                desenvolvedoras_lucro[desenvolvedora] = 0
+
+            desenvolvedoras_lucro[desenvolvedora] += lucro
+
+        # Ordena as desenvolvedoras por lucro em ordem decrescente
+        desenvolvedoras_sorted = sorted(desenvolvedoras_lucro.items(), key=lambda x: x[1], reverse=True)[:10]
+
+        # Exibe o lucro bruto geral
+        lucro_geral = controladorVendas.RecuperarVendas()
+        print(f"Lucro Bruto Geral: {lucro_geral}")
+        controladorVendas = ControladorVendas()  # Substitua com a criação real do ControladorVendas
+        resultado = controladorRelatorios.listarDesenvolvedorasMaiorLucro(controladorVendas)
+
+        return desenvolvedoras_sorted
+
+
 
 
 
