@@ -142,7 +142,7 @@ class Acao(Jogo):
                          comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return 0.0225 * super().valor
+        return self.valor - (0.0225 * self.valor)
 
     # StringToString
     def __str__(self):
@@ -167,7 +167,7 @@ class Aventura(Jogo):
                          comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return super().valor * 0.055
+        return self.valor - (self.valor * 0.055)
 
     # StringToString
     def __str__(self):
@@ -193,7 +193,7 @@ class RPG(Jogo):
                          comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return super().valor * 0.0375
+        return self.valor - (self.valor * 0.0375)
 
     # StringToString
     def __str__(self):
@@ -217,7 +217,7 @@ class Esporte(Jogo):
                          comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return super().valor * 0.0075
+        return self.valor - (self.valor * 0.0075)
 
     # StringToString
     def __str__(self):
@@ -241,7 +241,7 @@ class Corrida(Jogo):
                          comentario, disponivel, tipo)
 
     def calcularValor(self):
-        return super().valor * 0.0725
+        return self.valor - (self.valor * 0.0725)
 
     # StringToString
     def __str__(self):

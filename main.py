@@ -43,19 +43,15 @@ controlador_usuario.inserirGerente(gerenteA)
 controlador_usuario.inserirGerente(gerenteB)
 
 
-jogoA = controlador_jogo.criarJogo('Acao', 1, 'GTA V', 'Jogo de ação', desenvolvedoraA, '17/09/2013', 200, 'Windows 7 64 Bit Service Pack 1, Windows 8 64 Bit, Windows 8.1 64 Bit', 5, 'Muito bom', True)
+jogoA = controlador_jogo.criarJogo('Acao', 1, 'GTA V', 'Jogo de ação', desenvolvedoraA, '17/09/2013', 200, 'Windows 7 64 Bit Service Pack 1, Windows 8 64 Bit, Windows 8.1 64 Bit', 1.5, 'Muito bom', True)
 jogoB = controlador_jogo.criarJogo('Acao', 2, 'GTA IV', 'Jogo de ação', desenvolvedoraA, '29/04/2008', 100, 'Windows Vista - Service Pack 1 / Windows XP - Service Pack 3', 5, 'Muito bom', True)
-jogoC = controlador_jogo.criarJogo('Acao', 3, 'GTA San Andreas', 'Jogo de ação', desenvolvedoraA, '07/06/2005', 50, 'Windows 2000 Service Pack 1 ou superior', 5, 'Muito bom', True)
+jogoC = controlador_jogo.criarJogo('Acao', 3, 'GTA San Andreas', 'Jogo de ação', desenvolvedoraA, '07/06/2005', 50, 'Windows 2000 Service Pack 1 ou superior', 3, 'Muito bom', True)
 jogoD = controlador_jogo.criarJogo('Acao', 4, 'GTA Vice City', 'Jogo de ação', desenvolvedoraA, '13/05/2003', 30, 'Windows 98/98SE/ME/2000/XP', 5, 'Muito bom', True)
 jogoE = controlador_jogo.criarJogo('Acao', 5, 'GTA III', 'Jogo de ação', desenvolvedoraA, '20/05/2002', 20, 'Windows 98/98SE/ME/2000/XP', 5, 'Muito bom', True)
 jogoF = controlador_jogo.criarJogo('Acao', 6, 'GTA 2', 'Jogo de ação', desenvolvedoraA, '22/10/1999', 10, 'Windows 95/98/ME/2000/XP', 5, 'Muito bom', True)
-jogoG = controlador_jogo.criarJogo('Acao', 7, 'GTA', 'Jogo de ação', desenvolvedoraA, '21/10/1997', 5, 'Windows 95/98/ME/2000/XP', 5, 'Muito bom', True)
-jogoH = controlador_jogo.criarJogo('Acao', 8, 'GTA London 1969', 'Jogo de ação', desenvolvedoraA, '31/03/1999', 5, 'Windows 95/98/ME/2000/XP', 5, 'Muito bom', True)
-jogoI = controlador_jogo.criarJogo('Acao', 9, 'GTA London 1961', 'Jogo de ação', desenvolvedoraA, '01/06/1999', 5, 'Windows 95/98/ME/2000/XP', 5, 'Muito bom', True)
-jogoJ = controlador_jogo.criarJogo('Aventura', 10, 'Super Mario World', 'Jogo de aventura', desenvolvedoraB, '21/11/1990', 100, 'Super Nintendo', 5, 'Muito bom', True)
-jogoK = controlador_jogo.criarJogo('Aventura', 11, 'Super Mario Bros', 'Jogo de aventura', desenvolvedoraB, '13/09/1985', 50, 'Nintendo Entertainment System', 5, 'Muito bom', True)
-jogoL = controlador_jogo.criarJogo('Aventura', 12, 'Super Mario Bros 2', 'Jogo de aventura', desenvolvedoraB, '10/10/1988', 30, 'Nintendo Entertainment System', 5, 'Muito bom', True)
-jogoM = controlador_jogo.criarJogo('Aventura', 13, 'Super Mario Bros 3', 'Jogo de aventura', desenvolvedoraB, '23/10/1988', 20, 'Nintendo Entertainment System', 5, 'Muito bom', True)
+jogoG = controlador_jogo.criarJogo('Acao', 7, 'GTA', 'Jogo de ação', desenvolvedoraA, '21/10/1997', 5, 'Windows 95/98/ME/2000/XP', 0.1, 'Muito bom', True)
+jogoH = controlador_jogo.criarJogo('Acao', 8, 'GTA London 1969', 'Jogo de ação', desenvolvedoraA, '31/03/1999', 5, 'Windows 95/98/ME/2000/XP', 100, 'Muito bom', True)
+jogoI = controlador_jogo.criarJogo('Acao', 9, 'GTA London 1961', 'Jogo de ação', desenvolvedoraA, '01/06/1999', 5, 'Windows 95/98/ME/2000/XP', 50, 'Muito bom', True)
 
 
 controlador_jogo.inserirJogo(jogoA)
@@ -67,17 +63,14 @@ controlador_jogo.inserirJogo(jogoF)
 controlador_jogo.inserirJogo(jogoG)
 controlador_jogo.inserirJogo(jogoH)
 controlador_jogo.inserirJogo(jogoI)
-controlador_jogo.inserirJogo(jogoJ)
-controlador_jogo.inserirJogo(jogoK)
-controlador_jogo.inserirJogo(jogoL)
-controlador_jogo.inserirJogo(jogoM)
+
 
 
 controlador_vendas = ControladorVendas.ControladorVendas(sistema)
 
 itemVendaA = controlador_vendas.criarItemVenda(1, 1, 200, 1)
-itemVendaB = controlador_vendas.criarItemVenda(2, 10, 100, 1)
-itemVendaC = controlador_vendas.criarItemVenda(3, 11, 50, 1)
+itemVendaB = controlador_vendas.criarItemVenda(2, 2, 100, 1)
+itemVendaC = controlador_vendas.criarItemVenda(3, 3, 50, 1)
 
 
 controlador_vendas.inserirItemVenda(itemVendaA)
@@ -109,5 +102,7 @@ controlador_relatorios = ControladorRelatorios.ControladorRelatorios(sistema)
 #print(controlador_relatorios.listarHistoricoVendasCliente(usuarioA.codigo))
 #print(controlador_relatorios.todasVendas())
 #print(controlador_relatorios.listarVendasLucroMes(5))
-
-jogos = controlador_relatorios.listarJogos(Jogo.Jogo)
+#print(controlador_relatorios.listarJogoPorAvaliacao('B'))
+#print(controlador_relatorios.listarJogosMaisCaros())
+#print(controlador_relatorios.listarJogosMaisBaratos())
+#jogos = controlador_relatorios.listarJogos(Jogo.Jogo)

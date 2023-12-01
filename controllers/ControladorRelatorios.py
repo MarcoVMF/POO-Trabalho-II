@@ -1,4 +1,4 @@
-from controllers import ControladorJogo, ControladorVendas, ControladorDesenvolvedora, ControladorTransportadora, ControladorUsuario
+from controllers import ControladorJogo, ControladorVendas, ControladorDesenvolvedora, ControladorTransportadora, ControladorUsuario, Contexto, StrategyOrdenacaoA, StrategyOrdenacaoB
 from models import Iterator, Pagamento
 
 class ControladorRelatorios:
@@ -35,21 +35,45 @@ class ControladorRelatorios:
 
         return arr
 
-    #Listar os 10 jogos mais caros
+    # Listar os 10 jogos mais caros
     def listarJogosMaisCaros(self):
-        content = []
+        content = ''
         arr = self.ordenacao()
-        for i in range(len(arr)-1, len(arr)-11, -1):
-            content.append(arr[i])
+
+        for i in range(len(arr) - 1, max(len(arr) - 11, -1), -1):
+            if i >= 0:
+                content += str(arr[i])
+            else:
+                break
 
         return content
 
-    #Listar os 10 jogos mais baratos
-    def listasJogosMaisBaratos(self):
-        content = []
+    # Listar os 10 jogos mais baratos
+    def listarJogosMaisBaratos(self):
+        content = ''
         arr = self.ordenacao()
-        for i in range(0, 10):
-            content.append(arr[i])
+
+        for i in range(min(10, len(arr))):
+            content += str(arr[i])
+
+        return content
+
+    def listarJogoPorAvaliacao(self, tipoOrdenacao):
+        jogos = self.__controladorJogo.recuperarJogos()
+        content = ''
+
+        if tipoOrdenacao == "A":
+            estrategia = StrategyOrdenacaoA.EstrategiaSelectionSort()
+            contexto = Contexto.Contexto(estrategia)
+            contexto.executar(jogos)
+
+        else:
+            estrategia = StrategyOrdenacaoB.EstrategiaBubblesort()
+            contexto = Contexto.Contexto(estrategia)
+            contexto.executar(jogos)
+
+        for jogo in jogos:
+            content += str(jogo)
 
         return content
 

@@ -2,11 +2,10 @@ from controllers.OrdenacaoStrategy import EstrategiaOrdenacao
 
 # Estratégia B: Bubblesort
 class EstrategiaBubblesort(EstrategiaOrdenacao):
-    def ordenar(self, recuperarJogos):
-        # Implementação do algoritmo de ordenação Bubblesort
-        n = len(recuperarJogos)
+    def ordenar(self, jogos):
+        n = len(jogos)
         for i in range(n):
             for j in range(0, n-i-1):
-                if recuperarJogos[j].avaliacao < recuperarJogos[j+1].avaliacao:
-                    recuperarJogos[j], recuperarJogos[j+1] = recuperarJogos[j+1], recuperarJogos[j]
-        return recuperarJogos
+                if jogos[j].avaliacao < jogos[j + 1].avaliacao:
+                    jogos[j], jogos[j + 1] = jogos[j + 1], jogos[j]
+        return jogos
