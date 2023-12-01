@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-qclass OrdenacaoStrategy(ABC):
+class OrdenacaoStrategy(ABC):
     @abstractmethod
     def ordenar(self, recuperarJogos):
         pass
