@@ -1,9 +1,9 @@
 class Desenvolvedora:
 
     def __init__(self, codigo, cnpj, nome, email, site, redeSocial, endereco):
+        self.__nome = nome
         self.__codigo = codigo
         self.__cnpj = cnpj
-        self.__nome = nome
         self.__email = email
         self.__site = site
         self.__redeSocial = redeSocial
@@ -69,4 +69,12 @@ class Desenvolvedora:
 
     #StringToString
     def __str__(self):
-        return f'\nCódigo: {self.__codigo}\nCNPJ: {self.__cnpj}\nNome: {self.__nome}\nEmail: {self.__email}\nSite: {self.__site}\nRede social: {self.__redeSocial}\nEndereço: {self.__endereco}\n'
+        return ("\n======Desenvolvedora======"
+                f"\nCódigo: {self.codigo}"
+                f"\nNome: {self.nome}"
+                f"\nCNPJ: {self.cnpj}"
+                f"\nEmail: {self.email}"
+                f"\nSite: {self.site}"
+                f"\nRede Social: {self.redeSocial}"
+                f"\nEndereço: {self.endereco}"
+                f"\n==========================\n")

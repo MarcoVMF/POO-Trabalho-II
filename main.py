@@ -14,6 +14,7 @@ controlador_usuario = ControladorUsuario.ControladorUsuario(sistema)
 desenvolvedoraA = controlador_desenvolvedora.criarDesenvolvedora(1, '1234567', 'RockStar', 'rock@gmail', 'www.rockstar.com', 'www.instagram/rockstar', 'Rua RockAndRoll')
 desenvolvedoraB = controlador_desenvolvedora.criarDesenvolvedora(2, '9876543', 'Nintendo', 'nintendo@gmail', 'www.nintendo.com', 'www.instagram/nintendo', 'Rua NintendoMania')
 
+
 controlador_desenvolvedora.inserirDesenvolvedora(desenvolvedoraA)
 controlador_desenvolvedora.inserirDesenvolvedora(desenvolvedoraB)
 
@@ -21,16 +22,19 @@ controlador_desenvolvedora.inserirDesenvolvedora(desenvolvedoraB)
 transportadoraA = controlador_transportadora.criarTransportadora(1, '1234567', 'Transportadora A', 'transportadoraA@gmail', '11 0118181717', 'Rua TransportadoraA', 14)
 transportadoraB = controlador_transportadora.criarTransportadora(2, '9876543', 'Transportadora B', 'transportadoraB@gmail', '11 0118181717', 'Rua TransportadoraB', 5)
 
+
 controlador_transportadora.inserirTransportadora(transportadoraA)
 controlador_transportadora.inserirTransportadora(transportadoraB)
 
 pagamentoA = Pagamento.CartaoCredito(1, 'Usuario A', 'Visa', '12345678910')
 pagamentoB = Pagamento.Boleto(2, '12345678910')
 
+
 usuarioA = controlador_usuario.criarCliente(1, 'Usuario A', '1234567', '131313-3', '20/04/2000', 'Rua UsuarioA', '12345678910', 'usuarioA@gmail', '20/05/2022', 0, 0, pagamentoA)
 usuarioB = controlador_usuario.criarCliente(2, 'Usuario B', '9876543', '131313-3', '20/04/2000', 'Rua UsuarioB', '12345678910', 'usuarioB@gmail', '20/05/2022', 0, 1, pagamentoB)
 gerenteA = controlador_usuario.criarGerente(1, 'Gerente A', '1234567', '131313-3', '20/04/2000', 'Rua GerenteA', '12345678910', 'gerenteA@gmail', '20/05/2022', 'Nivel A', 1)
 gerenteB = controlador_usuario.criarGerente(2, 'Gerente B', '9876543', '131313-3', '20/04/2000', 'Rua GerenteB', '12345678910', 'gerenteB@gmail', '20/05/2022', 'Nivel B', 2)
+
 
 controlador_usuario.inserirCliente(usuarioA)
 controlador_usuario.inserirCliente(usuarioB)
@@ -54,7 +58,6 @@ jogoL = controlador_jogo.criarJogo('Aventura', 12, 'Super Mario Bros 2', 'Jogo d
 jogoM = controlador_jogo.criarJogo('Aventura', 13, 'Super Mario Bros 3', 'Jogo de aventura', desenvolvedoraB, '23/10/1988', 20, 'Nintendo Entertainment System', 5, 'Muito bom', True)
 
 
-
 controlador_jogo.inserirJogo(jogoA)
 controlador_jogo.inserirJogo(jogoB)
 controlador_jogo.inserirJogo(jogoC)
@@ -69,11 +72,13 @@ controlador_jogo.inserirJogo(jogoK)
 controlador_jogo.inserirJogo(jogoL)
 controlador_jogo.inserirJogo(jogoM)
 
+
 controlador_vendas = ControladorVendas.ControladorVendas(sistema)
 
 itemVendaA = controlador_vendas.criarItemVenda(1, 1, 200, 1)
 itemVendaB = controlador_vendas.criarItemVenda(2, 10, 100, 1)
 itemVendaC = controlador_vendas.criarItemVenda(3, 11, 50, 1)
+
 
 controlador_vendas.inserirItemVenda(itemVendaA)
 controlador_vendas.inserirItemVenda(itemVendaB)
@@ -103,6 +108,6 @@ controlador_relatorios = ControladorRelatorios.ControladorRelatorios(sistema)
 #print(controlador_relatorios.listarDezClientesMaiorNivel())
 #print(controlador_relatorios.listarHistoricoVendasCliente(usuarioA.codigo))
 #print(controlador_relatorios.todasVendas())
-print(controlador_relatorios.listarVendasLucroMes(5))
+#print(controlador_relatorios.listarVendasLucroMes(5))
 
 jogos = controlador_relatorios.listarJogos(Jogo.Jogo)

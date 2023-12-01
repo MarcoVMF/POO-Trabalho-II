@@ -45,4 +45,10 @@ class ItemVenda:
 
     #StringToString
     def __str__(self):
-        return f'Código: {self.__codigo} - Código Produto: {self.__codigoProduto} - Valor: {self.__valor} - Quantidade: {self.__quantidade}'
+        return ("\n======Item Venda======"
+                f"\nCódigo: {self.codigo}"
+                f"\nCódigo Produto: {self.codigoProduto}"
+                f"\nValor: {self.valor}"
+                f"\nQuantidade: {self.quantidade}"
+                f"\nTotal: {self.calcularTotal()}"
+                "\n======================\n")

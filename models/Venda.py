@@ -131,4 +131,16 @@ class Venda:
         else:
             itens_str = str(self.__itensVenda)
 
-        return f"Código: {self.__codigo}\nCliente: {self.__cliente}\nGerente: {self.__gerente}\nData da Venda: {self.__dataVenda}\nData da Entrega: {self.__dataEntrega}\nItens da Venda:\n{itens_str}\nPossui Itens Físicos: {self.__possuiItensFisico}\nValor Total: {self.__valorTotal}\nValor com Desconto: {self.__valorComDesconto}\nForma de Pagamento: {self.__formaPagamento}\nTransportadora: {self.__transportadora}"
+        return (f"\n==================Venda==================\n"
+                f"Código: {self.codigo}\n"
+                f"{self.cliente.__str__()}\n"
+                f"{self.gerente.__str__()}\n"
+                f"{self.transportadora.__str__()}\n"
+                f"Data da Venda: {self.dataVenda}\n"
+                f"Data da Entrega: {self.dataEntrega}\n"
+                f"Itens da Venda: {itens_str}\n"
+                f"Valor Total: {self.valorTotal}\n"
+                f"Valor com Desconto: {self.valorComDesconto}\n"
+                f"{self.formaPagamento.__str__()}\n"
+                f"Possui Itens Físicos: {self.possuiItensFisico}\n"
+                f"==============================================\n")

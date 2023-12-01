@@ -3,20 +3,6 @@ import os
 from models import SistemaJogosEletronicos
 from datetime import datetime
 
-'''sg.theme('DarkAmber')   # Add a touch of color
-# All the stuff inside your window.
-
-
-# Create the Window
-window = sg.Window('Window Title', layout)
-# Event Loop to process "events" and get the "values" of the inputs
-while True:
-    event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
-        break
-    print('You entered ', values[0])
-
-window.close()'''
 
 class tela:
     diretorio_atual = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +11,7 @@ class tela:
 
     def __init__(self, sistema):
         self.sistema = sistema
+
 
     @staticmethod
     def createWindow(type):

@@ -121,8 +121,18 @@ class Jogo(ABC):
 
     # StringToString
     def __str__(self):
-        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora.__str__()} \nData de Lançamento: {self._dataLancamento} \nValor: {self._valor} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
-
+        return (f"\n============Jogo============"
+                f"\nCódigo: {self._codigo}"
+                f"\nNome: {self._nome}"
+                f"\nDescrição: {self._descricao}"
+                f"\n{self._desenvolvedora.__str__()}"
+                f"\nData de Lançamento: {self._dataLancamento}"
+                f"\nValor: {self.calcularValor()}"
+                f"\nRequisitos Mínimos: {self._requisitosMinimos}"
+                f"\nAvaliação: {self._avaliacao}"
+                f"\nComentário: {self._comentario}"
+                f"\nDisponível: {self._disponivel}"
+                "\n================================\n")
 
 class Acao(Jogo):
 
@@ -136,7 +146,18 @@ class Acao(Jogo):
 
     # StringToString
     def __str__(self):
-        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {str(self.desenvolvedora)} \n \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
+        return (f"\n============Jogo Acao============"
+                f"\nCódigo: {self._codigo}"
+                f"\nNome: {self._nome}"
+                f"\nDescrição: {self._descricao}"
+                f"\n{self._desenvolvedora.__str__()}"
+                f"\nData de Lançamento: {self._dataLancamento}"
+                f"\nValor: {self.calcularValor()}"
+                f"\nRequisitos Mínimos: {self._requisitosMinimos}"
+                f"\nAvaliação: {self._avaliacao}"
+                f"\nComentário: {self._comentario}"
+                f"\nDisponível: {self._disponivel}"
+                "\n=================================\n")
 
 
 class Aventura(Jogo):
@@ -150,7 +171,18 @@ class Aventura(Jogo):
 
     # StringToString
     def __str__(self):
-        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora.__str__()} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
+        return (f"\n============Jogo Aventura============"
+                f"\nCódigo: {self._codigo}"
+                f"\nNome: {self._nome}"
+                f"\nDescrição: {self._descricao}"
+                f"\n{self._desenvolvedora.__str__()}"
+                f"\nData de Lançamento: {self._dataLancamento}"
+                f"\nValor: {self.calcularValor()}"
+                f"\nRequisitos Mínimos: {self._requisitosMinimos}"
+                f"\nAvaliação: {self._avaliacao}"
+                f"\nComentário: {self._comentario}"
+                f"\nDisponível: {self._disponivel}"
+                "\n======================================\n")
 
 
 class RPG(Jogo):
@@ -165,8 +197,18 @@ class RPG(Jogo):
 
     # StringToString
     def __str__(self):
-        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora.__str__()} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
-
+        return (f"\n============Jogo RPG============"
+                f"\nCódigo: {self._codigo}"
+                f"\nNome: {self._nome}"
+                f"\nDescrição: {self._descricao}"
+                f"\n{self._desenvolvedora.__str__()}"
+                f"\nData de Lançamento: {self._dataLancamento}"
+                f"\nValor: {self.calcularValor()}"
+                f"\nRequisitos Mínimos: {self._requisitosMinimos}"
+                f"\nAvaliação: {self._avaliacao}"
+                f"\nComentário: {self._comentario}"
+                f"\nDisponível: {self._disponivel}"
+                "\n================================\n")
 
 class Esporte(Jogo):
     def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao,
@@ -179,8 +221,18 @@ class Esporte(Jogo):
 
     # StringToString
     def __str__(self):
-        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora.__str__()} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
-
+        return (f"\n============Jogo Esporte============"
+                f"\nCódigo: {self._codigo}"
+                f"\nNome: {self._nome}"
+                f"\nDescrição: {self._descricao}"
+                f"\n{self._desenvolvedora.__str__()}"
+                f"\nData de Lançamento: {self._dataLancamento}"
+                f"\nValor: {self.calcularValor()}"
+                f"\nRequisitos Mínimos: {self._requisitosMinimos}"
+                f"\nAvaliação: {self._avaliacao}"
+                f"\nComentário: {self._comentario}"
+                f"\nDisponível: {self._disponivel}"
+                "\n====================================\n")
 
 class Corrida(Jogo):
     def __init__(self, codigo, nome, descricao, desenvolvedora, dataLancamento, valor, requisitosMinimos, avaliacao,
@@ -193,4 +245,15 @@ class Corrida(Jogo):
 
     # StringToString
     def __str__(self):
-        return f"Código: {self._codigo} \nNome: {self._nome} \nDescrição: {self._descricao} \nDesenvolvedora: {self._desenvolvedora.__str__()} \nData de Lançamento: {self._dataLancamento} \nValor: {self.calcularValor()} \nRequisitos Mínimos: {self._requisitosMinimos} \nAvaliação: {self._avaliacao} \nComentário: {self._comentario} \nDisponível: {self._disponivel}"
+        return (f"\n============Jogo Corrida============"
+                f"\nCódigo: {self._codigo}"
+                f"\nNome: {self._nome}"
+                f"\nDescrição: {self._descricao}"
+                f"\n{self._desenvolvedora.__str__()}"
+                f"\nData de Lançamento: {self._dataLancamento}"
+                f"\nValor: {self.calcularValor()}"
+                f"\nRequisitos Mínimos: {self._requisitosMinimos}"
+                f"\nAvaliação: {self._avaliacao}"
+                f"\nComentário: {self._comentario}"
+                f"\nDisponível: {self._disponivel}"
+                "\n======================================\n")

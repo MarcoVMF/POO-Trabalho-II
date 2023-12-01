@@ -6,7 +6,7 @@ class Pagamento(ABC):
         self.__codigo = codigo
 
     def __str__(self):
-        return f"Codigo: {self.codigo}"
+        return (f"Codigo: {self.codigo}")
 
     @property
     def codigo(self):
@@ -22,9 +22,10 @@ class Boleto(Pagamento):
         self.__numero = numero
 
     def __str__(self):
-        pagamentoStr = super().__str__()
-        return f"{pagamentoStr}\n" \
-               f"Numero: {self.__numero}"
+        return (f"\n======Boleto======"
+                f"\nCodigo: {super().codigo}"
+                f"\nNumero: {self.numero}"
+                f"\n==================\n")
 
     @property
     def numero(self):
@@ -43,11 +44,12 @@ class CartaoCredito(Pagamento):
         self.__numero = numero
 
     def __str__(self):
-        pagamentoStr = super().__str__()
-        return f"{pagamentoStr}\n" \
-               f"Nome: {self.__nome}\n" \
-               f"Bandeira: {self.__bandeira}\n" \
-               f"Numero: {self.__numero}"
+        return (f"\n======Cartao Credito======"
+                f"\nCodigo: {super().codigo}"
+                f"\nNome: {self.nome}"
+                f"\nBandeira: {self.bandeira}"
+                f"\nNumero: {self.numero}"
+                f"\n==================\n")
 
     @property
     def nome(self):
@@ -79,9 +81,10 @@ class Pix(Pagamento):
         self.__codigoPix = codigoPix
 
     def __str__(self):
-        pagamentoStr = super().__str__()
-        return f"{pagamentoStr}\n" \
-               f"Codigo Pix: {self.__codigoPix}"
+        return (f"\n======Pix======"
+                f"\nCodigo: {super().codigo}"
+                f"\nCodigo Pix: {self.codigoPix}"
+                f"\n==================\n")
 
     def gerarCodigoPix(self):
         size = 30

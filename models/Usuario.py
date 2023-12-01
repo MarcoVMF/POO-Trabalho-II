@@ -77,8 +77,16 @@ class Usuario(ABC):
 
     #StringToString
     def __str__(self):
-        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\n"
-
+        return (f"\n======Usuário======"
+                f"\nCódigo: {self.codigo}"
+                f"\nNome: {self.nome}"
+                f"\nCPF: {self.cpf}"
+                f"\nRG: {self.rg}"
+                f"\nData de Nascimento: {self.dataNascimento}"
+                f"\nEndereço: {self.endereco}"
+                f"\nCEP: {self.cep}"
+                f"\nEmail: {self.email}"
+                f"\n===================\n")
 
 class Cliente(Usuario):
     def __init__(self, codigo, nome, cpf, rg, dataNascimento, endereco, cep, email, dataCadastro, nivel, clienteEpico, pagamento):
@@ -123,7 +131,20 @@ class Cliente(Usuario):
 
     #StringToString
     def __str__(self):
-        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\nData de Cadastro: {self._dataCadastro}\nNível: {self._nivel}\nCliente Épico: {(self._clienteEpico)}\nPagamento: {str(self._pagamento)}\n"
+        return (f"\n======Cliente======"
+                f"\nCódigo: {super().codigo}"
+                f"\nNome: {super().nome}"
+                f"\nCPF: {super().cpf}"
+                f"\nRG: {super().rg}"
+                f"\nData de Nascimento: {super().dataNascimento}"
+                f"\nEndereço: {super().endereco}"
+                f"\nCEP: {super().cep}"
+                f"\nEmail: {super().email}"
+                f"\nData de Cadastro: {self.dataCadastro}"
+                f"\nNível: {self.nivel}"
+                f"\nCliente Épico: {self.clienteEpico}"
+                f"\nPagamento: {self.pagamento}"
+                f"\n===================\n")
 
 class Gerente(Usuario):
     def __init__(self, codigo, nome, cpf, rg, dataNascimento, endereco, cep, email, salario, pis, dataAdmissao):
@@ -158,4 +179,16 @@ class Gerente(Usuario):
 
     #StringToString
     def __str__(self):
-        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\nSalário: {self._salario}\nPIS: {self._pis}\nData de Admissão: {self._dataAdmissao}\n"
+        return (f"\n======Gerente======"
+                f"\nCódigo: {super().codigo}"
+                f"\nNome: {super().nome}"
+                f"\nCPF: {super().cpf}"
+                f"\nRG: {super().rg}"
+                f"\nData de Nascimento: {super().dataNascimento}"
+                f"\nEndereço: {super().endereco}"
+                f"\nCEP: {super().cep}"
+                f"\nEmail: {super().email}"
+                f"\nData de Cadastro: {self.salario}"
+                f"\nNível: {self.pis}"
+                f"\nCliente Épico: {self.dataAdmissao}"
+                f"\n===================\n")
