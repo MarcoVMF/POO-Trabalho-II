@@ -123,7 +123,7 @@ class Cliente(Usuario):
 
     #StringToString
     def __str__(self):
-        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\nData de Cadastro: {self._dataCadastro}\nNível: {self._nivel}\nCliente Épico: {self._clienteEpico}\nPagamento: {str(self._pagamento)}\n"
+        return f"Código: {self._codigo}\nNome: {self._nome}\nCPF: {self._cpf}\nRG: {self._rg}\nData de Nascimento: {self._dataNascimento}\nEndereço: {self._endereco}\nCEP: {self._cep}\nEmail: {self._email}\nData de Cadastro: {self._dataCadastro}\nNível: {self._nivel}\nCliente Épico: {(self._clienteEpico)}\nPagamento: {str(self._pagamento)}\n"
 
 class Gerente(Usuario):
     def __init__(self, codigo, nome, cpf, rg, dataNascimento, endereco, cep, email, salario, pis, dataAdmissao):

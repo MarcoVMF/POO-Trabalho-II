@@ -22,7 +22,7 @@ class Jogo(ABC):
         pass
 
     def atualizarAvaliacao(self, avaliacaoNova):
-        self._avaliacao = avaliacaoNova
+        self._avaliacao = (self._avaliacao + avaliacaoNova)/2
         return self._avaliacao
         
     def estaDisponivel(self):

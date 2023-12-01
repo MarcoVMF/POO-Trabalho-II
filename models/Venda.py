@@ -1,27 +1,39 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 class Venda:
     def __init__(self, codigo, cliente, gerente, dataVenda, dataEntrega, itensVenda, possuiItensFisico, valorTotal, valorComDesconto, formaPagamento, transportadora):
         self.__codigo = codigo
         self.__cliente = cliente
         self.__gerente = gerente
+        self.__transportadora = transportadora
         self.__dataVenda = datetime.strptime(dataVenda, "%d/%m/%Y")
-        self.__dataEntrega = datetime.strptime(dataEntrega, "%d/%m/%Y")
+        self.__dataEntrega = self.calcularDataEntrega()
         self.__itensVenda = itensVenda
         self.__possuiItensFisico = possuiItensFisico
-        self.__valorTotal = valorTotal
-        self.__valorComDesconto = valorComDesconto
+        self.__valorComDesconto = self.calcularValorTotal()
+        self.__valorTotal = self.calcularValorTotal()
         self.__formaPagamento = formaPagamento
-        self.__tranportadora = transportadora
 
 
     def calcularValorTotal(self):
-        pass
+        aux = 0
+        if isinstance(self.__itensVenda, list):
+            for item in self.__itensVenda:
+                aux += item.calcularTotal()
+        else:
+            aux += self.__itensVenda.calcularTotal()
+
+        if self.__cliente.clienteEpico:
+            aux = aux * 0.95
+
+        return aux
+
 
     def calcularDataEntrega(self):
-        pass
+        return self.__dataVenda + timedelta(days=self.__transportadora.tempoEntrega)
+
 
     def addItemVenda(self, itemVenda):
-        pass
+        self.__itensVenda.append(itemVenda)
 
     #Getter's e Setter'
     @property
@@ -112,6 +124,11 @@ class Venda:
     def transportadora(self, transportadora):
         self.__transportadora = transportadora
 
-    #StringToString
     def __str__(self):
-        return f"Código: {self.__codigo}\nCliente: {self.__cliente}\nGerente: {self.__gerente}\nData da Venda: {self.__dataVenda}\nData da Entrega: {self.__dataEntrega}\nItens da Venda: {self.__itensVenda}\nPossui Itens Físicos: {self.__possuiItensFisico}\nValor Total: {self.__valorTotal}\nValor com Desconto: {self.__valorComDesconto}\nForma de Pagamento: {self.__formaPagamento}\nTransportadora: {self.__transportadora}"
+        itens_str = ""
+        if isinstance(self.__itensVenda, list):
+            itens_str = "\n".join([str(item) for item in self.__itensVenda])
+        else:
+            itens_str = str(self.__itensVenda)
+
+        return f"Código: {self.__codigo}\nCliente: {self.__cliente}\nGerente: {self.__gerente}\nData da Venda: {self.__dataVenda}\nData da Entrega: {self.__dataEntrega}\nItens da Venda:\n{itens_str}\nPossui Itens Físicos: {self.__possuiItensFisico}\nValor Total: {self.__valorTotal}\nValor com Desconto: {self.__valorComDesconto}\nForma de Pagamento: {self.__formaPagamento}\nTransportadora: {self.__transportadora}"

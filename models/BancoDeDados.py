@@ -11,7 +11,7 @@ class BancoDeDados:
 
     def _criarTabelas(self):
         self._cursor.execute(
-            'CREATE TABLE IF NOT EXISTS clientes (codigo INTEGER PRIMARY KEY, nome TEXT,cpf TEXT, rg TEXT, dataNascimento TEXT, endereco TEXT, cep TEXT, email TEXT, dataCadastro TEXT, nivel INTEGER, clienteEpico INTEGER, pagamento INTEGER, pagamentoTipo TEXT)')
+            'CREATE TABLE IF NOT EXISTS clientes (codigo INTEGER PRIMARY KEY, nome TEXT,cpf TEXT, rg TEXT, dataNascimento TEXT, endereco TEXT, cep TEXT, email TEXT, dataCadastro TEXT, nivel FLOAT, clienteEpico INTEGER, pagamento INTEGER, pagamentoTipo TEXT)')
         self._cursor.execute(
             'CREATE TABLE IF NOT EXISTS gerentes (codigo INTEGER PRIMARY KEY, nome TEXT,cpf TEXT, rg TEXT, dataNascimento TEXT, endereco TEXT, cep TEXT, email TEXT, salario INTEGER, pis INTEGER, dataAdmissao TEXT)')
         self._cursor.execute(
@@ -76,14 +76,23 @@ class BancoDeDados:
         self.inserirFormaPagamento(cliente.pagamento)
         self._conexao.commit()
 
+    def atualizarCliente(self, cliente):
+        self._cursor.execute(
+            'UPDATE clientes SET nome = ?, cpf = ?, rg = ?, dataNascimento = ?, endereco = ?, cep = ?, email = ?, dataCadastro = ?, nivel = ?, clienteEpico = ?, pagamento = ?, pagamentoTipo = ? WHERE codigo = ?',
+            (cliente.nome, cliente.cpf, cliente.rg, cliente.dataNascimento, cliente.endereco, cliente.cep,
+             cliente.email, cliente.dataCadastro, cliente.nivel, cliente.clienteEpico, cliente.pagamento.codigo, type(cliente.pagamento).__name__, cliente.codigo))
+        self.inserirFormaPagamento(cliente.pagamento)
+        self._conexao.commit()
+
     #Retorna uma tupla com o cliente
     def recuperarCliente(self, codigo):
         codigo = str(codigo)
         self._cursor.execute('SELECT * FROM clientes WHERE codigo = ?', (codigo,))
         conteudo = self._cursor.fetchone()
         pagamento = self.recuperarFormaPagamento(conteudo[11], conteudo[12])
-        cliente = Usuario.Cliente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], pagamento, conteudo[11])
+        cliente = Usuario.Cliente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10], pagamento)
         return cliente
+
 
     #Retorna uma array de tuplas com todos os clientes
     def recuperarClientes(self):
@@ -92,7 +101,7 @@ class BancoDeDados:
         conteudos =  self._cursor.fetchall()
         for conteudo in conteudos:
             pagamento = self.recuperarFormaPagamento(conteudo[11], conteudo[12])
-            cliente = Usuario.Cliente(conteudo[0], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10], pagamento, conteudo[12])
+            cliente = Usuario.Cliente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10], pagamento)
             clientes.append(cliente)
         return clientes
 
@@ -116,7 +125,7 @@ class BancoDeDados:
 
     def recuperarGerentes(self):
         self._cursor.execute('SELECT * FROM gerentes')
-        conteudos =  self._cursor.fetchall()
+        conteudos = self._cursor.fetchall()
         gerentes = []
         for conteudo in conteudos:
             gerente = Usuario.Gerente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
@@ -144,7 +153,7 @@ class BancoDeDados:
 
     def recuperarTransportadoras(self):
         self._cursor.execute('SELECT * FROM transportadoras')
-        conteudos =  self._cursor.fetchall()
+        conteudos = self._cursor.fetchall()
         transportadoras = []
         for conteudo in conteudos:
             transportadora = Transportadora.Transportadora(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6])
@@ -175,7 +184,7 @@ class BancoDeDados:
 
     def recuperarDesenvolvedoras(self):
         self._cursor.execute('SELECT * FROM desenvolvedoras')
-        conteudos =  self._cursor.fetchall()
+        conteudos = self._cursor.fetchall()
         desenvolvedoras = []
         for conteudo in conteudos:
             desenvolvedora = Desenvolvedora.Desenvolvedora(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6])
@@ -201,7 +210,7 @@ class BancoDeDados:
 
     def recuperarJogo(self, codigo):
         codigo = str(codigo)
-        self._cursor.execute('SELECT * FROM jogos WHERE codigo = ?', (codigo))
+        self._cursor.execute('SELECT * FROM jogos WHERE codigo = ?', (codigo,))
         conteudo = self._cursor.fetchone()
         data_objeto = datetime.strptime(conteudo[4], '%Y-%m-%d %H:%M:%S')
         data_formatada = data_objeto.strftime('%d/%m/%Y')
@@ -247,6 +256,12 @@ class BancoDeDados:
 
         return jogos
 
+    def atualizarJogo(self, jogo):
+        self._cursor.execute(
+            'UPDATE jogos SET nome = ?, descricao = ?, desenvolvedora = ?, dataLancamento = ?, valor = ?, requisitosMinimos = ?, avaliacao = ?, comentario = ?, disponivel = ?, tipo = ? WHERE codigo = ?',
+            (jogo.nome, jogo.descricao, jogo.desenvolvedora.codigo, jogo.dataLancamento, jogo.valor, jogo.requisitosMinimos, jogo.avaliacao, jogo.comentario, jogo.disponivel, jogo.tipo, jogo.codigo))
+        self._conexao.commit()
+
     def removerJogo(self, codigo):
         codigo = str(codigo)
         self._cursor.execute('DELETE FROM jogos WHERE codigo = ?', (codigo))
@@ -259,7 +274,8 @@ class BancoDeDados:
         self._conexao.commit()
 
     def recuperarItemVenda(self, codigo):
-        self._cursor.execute('SELECT * FROM itensVendas WHERE codigo = ?', (codigo))
+        codigo = str(codigo)
+        self._cursor.execute('SELECT * FROM itensVendas WHERE codigo = ?', (codigo,))
         conteudo =  self._cursor.fetchone()
         produto = self.recuperarJogo(conteudo[1])
         itemVenda = ItemVenda.ItemVenda(conteudo[0], produto, conteudo[2], conteudo[3])
@@ -281,32 +297,56 @@ class BancoDeDados:
 
     def inserirVenda(self, venda):
         itensVenda = venda.itensVenda
-        itensVendaString = ','.join(str(item.codigo) for item in itensVenda)
+        if isinstance(itensVenda, list):
+            itensVendaString = ','.join(str(item.codigo) for item in itensVenda)
+        else:
+            itensVendaString = str(itensVenda.codigo)
 
         self._cursor.execute(
-            'INSERT INTO vendas (codigo, cliente, gerente, dataVenda, dataEntrega, itensVenda, possuiItensFisico, valorTotal, valorComDesconto, formaPagamento, transportadora) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(codigo) DO NOTHING',
+            'INSERT INTO vendas (codigo, cliente, gerente, dataVenda, dataEntrega, itensVenda, possuiItensFisico, valorTotal, valorComDesconto, formaPagamento, tipoPagamento, transportadora) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(codigo) DO NOTHING',
             (venda.codigo, venda.cliente.codigo, venda.gerente.codigo, venda.dataVenda, venda.dataEntrega,
              itensVendaString, venda.possuiItensFisico, venda.valorTotal, venda.valorComDesconto,
              venda.formaPagamento.codigo, type(venda.formaPagamento).__name__, venda.transportadora.codigo))
+        if isinstance(itensVenda, list):
+            for item in itensVenda:
+                venda.cliente.nivel = venda.cliente.nivel + 1
+        else:
+            venda.cliente.nivel = venda.cliente.nivel + 1
+
+        if isinstance(itensVenda, list):
+            for item in itensVenda:
+                self.atualizarJogo(self.recuperarJogo(item.codigoProduto))
+        else:
+            self.atualizarJogo(self.recuperarJogo(itensVenda.codigoProduto))
+        self.atualizarCliente(venda.cliente)
         self._conexao.commit()
 
+
     def recuperarVenda(self, codigo):
+        codigo = str(codigo)
         self._cursor.execute('SELECT * FROM vendas WHERE codigo = ?', (codigo))
         conteudo = self._cursor.fetchone()
         cliente = self.recuperarCliente(conteudo[1])
         gerente = self.recuperarGerente(conteudo[2])
+
+        data_objeto = datetime.strptime(conteudo[3], '%Y-%m-%d %H:%M:%S')
+        data_venda = data_objeto.strftime('%d/%m/%Y')
+
+        data_objeto = datetime.strptime(conteudo[4], '%Y-%m-%d %H:%M:%S')
+        data_entrega = data_objeto.strftime('%d/%m/%Y')
+
         itensVenda = []
         for carac in conteudo[5]:
             itemVenda = self.recuperarItemVenda(int(carac))
             itensVenda.append(itemVenda)
         formaPagamento = self.recuperarFormaPagamento(conteudo[9], conteudo[10])
         transportadora = self.recuperarTrasportadora(conteudo[11])
-        venda = Venda.Venda(conteudo[0], cliente, gerente, conteudo[3], conteudo[4], itensVenda, conteudo[6], conteudo[7], conteudo[8], formaPagamento, transportadora)
+        venda = Venda.Venda(conteudo[0], cliente, gerente, data_venda, data_entrega, itensVenda, conteudo[6], conteudo[7], conteudo[8], formaPagamento, transportadora)
         return venda
 
     def recuperarVendas(self):
         self._cursor.execute('SELECT * FROM vendas')
-        conteudos =  self._cursor.fetchall()
+        conteudos = self._cursor.fetchall()
         vendas = []
         for conteudo in conteudos:
             venda = self.recuperarVenda(conteudo[0])

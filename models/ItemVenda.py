@@ -42,3 +42,7 @@ class ItemVenda:
     @quantidade.setter
     def quantidade(self, quantidade):
         self.__quantidade = quantidade
+
+    #StringToString
+    def __str__(self):
+        return f'Código: {self.__codigo} - Código Produto: {self.__codigoProduto} - Valor: {self.__valor} - Quantidade: {self.__quantidade}'

@@ -68,5 +68,5 @@ class Transportadora:
 
     #StringToString
     def __str__(self):
-        return f"Código: {self.codigo} \nCNPJ: {self.cnpj} \nNome: {self.nome} \nEmail: {self.email} \nTelefone: {self.telefone} \nEndereço: {self.endereco} \nTempo de Entrega: {self.tempoEntrega}"
+        return f"Código: {self.codigo} \nCNPJ: {self.cnpj} \nNome: {self.nome} \nEmail: {self.email} \nTelefone: {self.telefone} \nEndereço: {self.endereco} \nTempo de Entrega: {self.tempoEntrega}\n"
     

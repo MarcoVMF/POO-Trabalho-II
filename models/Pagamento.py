@@ -6,7 +6,7 @@ class Pagamento(ABC):
         self.__codigo = codigo
 
     def __str__(self):
-        return f"Codigo da Nota: {self.codigo}"
+        return f"Codigo: {self.codigo}"
 
     @property
     def codigo(self):
