@@ -1,6 +1,6 @@
 from controllers import ControladorRelatorios, ControladorJogo, ControladorDesenvolvedora, ControladorTransportadora, ControladorUsuario
 from models import Jogo, BancoDeDados, Configuracao, Desenvolvedora, FactoryJogo, ItemVenda, Pagamento, SistemaJogosEletronicos, Transportadora, Usuario, Venda, Iterator
-from views import *
+from views import view, TelaInicial
 
 bd = BancoDeDados.BancoDeDados()
 sistema = SistemaJogosEletronicos.SistemaJogosEletronicos()
@@ -69,7 +69,8 @@ controlador_jogo.inserirJogo(jogoK)
 controlador_jogo.inserirJogo(jogoL)
 controlador_jogo.inserirJogo(jogoM)
 
-
+teste = view.tela(sistema)
+teste.createWindow('cadastrarCliente')
 
 controlador_relatorios = ControladorRelatorios.ControladorRelatorios(sistema)
 
