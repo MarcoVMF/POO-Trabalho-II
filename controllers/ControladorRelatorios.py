@@ -62,21 +62,32 @@ class ControladorRelatorios:
         desenvolvedoras = self.__controladorDesenvolvedora.recuperarDesenvolvedoras()
         return desenvolvedoras
 
-    def listarDesevnlvedorasMaisJogosVendidos(self):
-        desenvolvedoras = self.__controladorDesenvolvedora.recuperarDesenvolvedoras()
-        desenvolvedoras = Iterator.Iterator(desenvolvedoras)
-        content = []
-        for desenvolvedora in desenvolvedoras:
-            content.append(desenvolvedora)
+    #Listar as 10 desenvolvedoras com mais jogos vendidos
+    def listarDesenvolvedorasMaisJogosVendidos(self):
+            desenvolvedoras_vendas = {}
+            jogos = self.__controladorJogo.recuperarJogos()
 
-        return content
+            for jogo in jogos:
+                desenvolvedora = jogo.desenvolvedora
+                vendas = self.__controladorJogo.recuperarVendas(jogo)
 
-    def listarDesevolvedorasMaiorLucro(self):
+                if desenvolvedora not in desenvolvedoras_vendas:
+                    desenvolvedoras_vendas[desenvolvedora] = 0
+
+                desenvolvedoras_vendas[
+                    desenvolvedora] += 1  # Conta o número de jogos vendidos
+
+            # Ordena as desenvolvedoras por número de jogos vendidos em ordem decrescente
+            desenvolvedoras_sorted = sorted(desenvolvedoras_vendas.items(), key=lambda x: x[1], reverse=True)
+
+            return desenvolvedoras_sorted
+
+    #def listarDesenvolvedorasMaiorLucro(self):
 
 
 
 
-    # Terminar de implementar
+    #Terminar de implementar
     def listarVendasLucroDesenvolvedora(self, mes, desenvolvedora):
         vendas = self.__controladorVenda.recuperarVendas()
         produtos = self.__controladorJogo.recuperarJogos()
