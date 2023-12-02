@@ -11,12 +11,18 @@ class ControladorRelatorios:
 
     #Listar todos os jogos e todos os jogos de um tipo específico
     def listarJogos(self, tipoJogo):
-        conteudo = []
+
         jogos = self.__controladorJogo.recuperarJogos()
-        jogos = Iterator.Iterator(jogos)
-        for jogo in jogos:
-            if isinstance(jogo, tipoJogo):
-                conteudo.append(jogo)
+        if isinstance(jogos, list):
+            conteudo = ''
+            jogos = Iterator.Iterator(jogos)
+            for jogo in jogos:
+                if isinstance(jogo, tipoJogo):
+                    conteudo += str(jogo) + '\n'
+        else:
+            conteudo = ''
+            if isinstance(jogos, tipoJogo):
+                conteudo += str(jogos) + '\n'
 
         return conteudo
 
@@ -79,12 +85,12 @@ class ControladorRelatorios:
 
     # Listar todos as Desenvolvedoras cadastrados.
     def listarDesenvolvedoras(self):
-        content = []
+        content = ''
         desenvolvedoras = self.__controladorDesenvolvedora.recuperarDesenvolvedoras()
         desenvolvedoras = Iterator.Iterator(desenvolvedoras)
 
         for desenvolvedora in desenvolvedoras:
-            content.push(str(desenvolvedora))
+            content += desenvolvedora.__str__() + "\n"
 
         return content
 
@@ -211,7 +217,6 @@ class ControladorRelatorios:
         clientes = self.__controladorUsuario.recuperarClientes()
         clientes = Iterator.Iterator(clientes)
         for cliente in clientes:
-            print(cliente.clienteEpico)
             content += cliente.__str__() + '\n'
 
         return content
@@ -253,7 +258,7 @@ class ControladorRelatorios:
         content = ''
         for venda in vendas:
             if venda.cliente.codigo == clienteCodigo:
-                content += venda.__str__() + '\n'
+                content += str(venda) + '\n'
 
         return content
 
@@ -281,6 +286,7 @@ class ControladorRelatorios:
         produtos = Iterator.Iterator(produtos)
 
         for venda in vendas:
+
             if venda.dataVenda.month == mes:
                 itens = venda.itensVenda
                 if isinstance(itens, list):
@@ -318,7 +324,8 @@ class ControladorRelatorios:
                         for produto in produtos:
 
                             if item.codigoProduto.codigo == produto.codigo:
-                                if produto.desenvolvedora.nome == desenvolvedora:
+
+                                if produto.desenvolvedora.codigo == desenvolvedora:
                                     lucro = lucro + item.calcularTotal()
                                     conteudo += venda.__str__() + '\n'
                 else:

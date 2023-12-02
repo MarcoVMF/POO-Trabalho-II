@@ -19,6 +19,10 @@ class ControladorUsuario:
     def recuperarClientes(self):
         return self.__bancodedados.recuperarClientes()
 
+    def atualizarCliente(self, cliente):
+        self.__bancodedados.atualizarCliente(cliente)
+        self.__sistema.atualizarDados()
+
     def removerCliente(self, codigo):
         self.__bancodedados.removerCliente(codigo)
         self.__sistema.atualizarDados()

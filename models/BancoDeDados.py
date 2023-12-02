@@ -44,36 +44,49 @@ class BancoDeDados:
         self._conexao.commit()
 
     def recuperarFormaPagamento(self, codigo, pagamentoTipo):
+        formaPagamento = None
         codigo = str(codigo)
         if pagamentoTipo == 'Boleto':
-            self._cursor.execute('SELECT * FROM boletos WHERE codigo = ?', (codigo))
+            self._cursor.execute('SELECT * FROM boletos WHERE codigo = ?', (codigo,))
             conteudo = self._cursor.fetchone()
-            formaPagamento = Pagamento.Boleto(conteudo[0], conteudo[1])
+            if conteudo != None:
+                formaPagamento = Pagamento.Boleto(conteudo[0], conteudo[1])
+
         elif pagamentoTipo == 'CartaoCredito':
-            self._cursor.execute('SELECT * FROM cartaoCreditos WHERE codigo = ?', (codigo))
+            self._cursor.execute('SELECT * FROM cartaoCreditos WHERE codigo = ?', (codigo,))
             conteudo = self._cursor.fetchone()
-            formaPagamento = Pagamento.CartaoCredito(conteudo[0], conteudo[1], conteudo[2], conteudo[3])
+            if conteudo != None:
+                formaPagamento = Pagamento.CartaoCredito(conteudo[0], conteudo[1], conteudo[2], conteudo[3])
+
         elif pagamentoTipo == 'PIX':
-            self._cursor.execute('SELECT * FROM PIXs WHERE codigo = ?', (codigo))
+            self._cursor.execute('SELECT * FROM PIXs WHERE codigo = ?', (codigo,))
             conteudo = self._cursor.fetchone()
-            formaPagamento = Pagamento.Pix(conteudo[0], conteudo[1])
+            if conteudo != None:
+                formaPagamento = Pagamento.Pix(conteudo[0], conteudo[1])
+
         return formaPagamento
 
     def removerFormaPagamento(self, codigo, pagamentoTipo):
         if pagamentoTipo == 'Boleto':
-            self._cursor.execute('DELETE FROM boletos WHERE codigo = ?', (codigo))
+            self._cursor.execute('DELETE FROM boletos WHERE codigo = ?', (codigo,))
         elif pagamentoTipo == 'CartaoCredito':
-            self._cursor.execute('DELETE FROM cartaoCreditos WHERE codigo = ?', (codigo))
+            self._cursor.execute('DELETE FROM cartaoCreditos WHERE codigo = ?', (codigo,))
         elif pagamentoTipo == 'PIX':
-            self._cursor.execute('DELETE FROM PIXs WHERE codigo = ?', (codigo))
+            self._cursor.execute('DELETE FROM PIXs WHERE codigo = ?', (codigo,))
         self._conexao.commit()
 
     def inserirCliente(self, cliente):
-        self._cursor.execute(
-            'INSERT INTO clientes (codigo,nome,cpf,rg,dataNascimento,endereco,cep,email,dataCadastro,nivel,clienteEpico, pagamento, pagamentoTipo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(codigo) DO NOTHING',
-            (cliente.codigo, cliente.nome, cliente.cpf, cliente.rg, cliente.dataNascimento, cliente.endereco, cliente.cep,
-             cliente.email, cliente.dataCadastro, cliente.nivel, cliente.clienteEpico, cliente.pagamento.codigo, type(cliente.pagamento).__name__))
-        self.inserirFormaPagamento(cliente.pagamento)
+        if cliente.pagamento != None:
+            self._cursor.execute(
+                'INSERT INTO clientes (codigo,nome,cpf,rg,dataNascimento,endereco,cep,email,dataCadastro,nivel,clienteEpico, pagamento, pagamentoTipo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(codigo) DO NOTHING',
+                (cliente.codigo, cliente.nome, cliente.cpf, cliente.rg, cliente.dataNascimento, cliente.endereco, cliente.cep,
+                 cliente.email, cliente.dataCadastro, cliente.nivel, cliente.clienteEpico, cliente.pagamento.codigo, type(cliente.pagamento).__name__))
+            self.inserirFormaPagamento(cliente.pagamento)
+        else:
+            self._cursor.execute(
+                'INSERT INTO clientes (codigo,nome,cpf,rg,dataNascimento,endereco,cep,email,dataCadastro,nivel,clienteEpico, pagamento, pagamentoTipo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(codigo) DO NOTHING',
+                (cliente.codigo, cliente.nome, cliente.cpf, cliente.rg, cliente.dataNascimento, cliente.endereco, cliente.cep, cliente.email, cliente.dataCadastro, cliente.nivel, cliente.clienteEpico, -1, "None"))
+
         self._conexao.commit()
 
     def atualizarCliente(self, cliente):
@@ -89,9 +102,12 @@ class BancoDeDados:
         codigo = str(codigo)
         self._cursor.execute('SELECT * FROM clientes WHERE codigo = ?', (codigo,))
         conteudo = self._cursor.fetchone()
-        pagamento = self.recuperarFormaPagamento(conteudo[11], conteudo[12])
-        cliente = Usuario.Cliente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10], pagamento)
-        return cliente
+        if conteudo != None:
+            pagamento = self.recuperarFormaPagamento(conteudo[11], conteudo[12])
+            cliente = Usuario.Cliente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10], pagamento)
+            return cliente
+        else:
+            return None
 
 
     #Retorna uma array de tuplas com todos os clientes
@@ -120,8 +136,11 @@ class BancoDeDados:
         codigo = str(codigo)
         self._cursor.execute('SELECT * FROM gerentes WHERE codigo = ?', (codigo,))
         conteudo = self._cursor.fetchone()
-        gerente = Usuario.Gerente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
-        return gerente
+        if conteudo != None:
+            gerente = Usuario.Gerente(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
+            return gerente
+        else:
+            return None
 
     def recuperarGerentes(self):
         self._cursor.execute('SELECT * FROM gerentes')
@@ -146,10 +165,13 @@ class BancoDeDados:
 
     def recuperarTrasportadora(self, codigo):
         codigo = str(codigo)
-        self._cursor.execute('SELECT * FROM transportadoras WHERE codigo = ?', (codigo))
+        self._cursor.execute('SELECT * FROM transportadoras WHERE codigo = ?', (codigo,))
         conteudo =  self._cursor.fetchone()
-        transportadora = Transportadora.Transportadora(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6])
-        return transportadora
+        if conteudo != None:
+            transportadora = Transportadora.Transportadora(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6])
+            return transportadora
+        else:
+            return None
 
     def recuperarTransportadoras(self):
         self._cursor.execute('SELECT * FROM transportadoras')
@@ -162,7 +184,7 @@ class BancoDeDados:
 
     def removerTransportadora(self, codigo):
         codigo = str(codigo)
-        self._cursor.execute('DELETE FROM transportadoras WHERE codigo = ?', (codigo))
+        self._cursor.execute('DELETE FROM transportadoras WHERE codigo = ?', (codigo,))
         self._conexao.commit()
 
     def inserirDesenvolvedora(self, desenvolvedora):
@@ -174,7 +196,7 @@ class BancoDeDados:
 
     def recuperarDesenvolvedora(self, codigo):
         codigo = str(codigo)
-        self._cursor.execute('SELECT * FROM desenvolvedoras WHERE codigo = ?', (codigo))
+        self._cursor.execute('SELECT * FROM desenvolvedoras WHERE codigo = ?', (codigo,))
         conteudo = self._cursor.fetchone()
         if conteudo is not None:
             desenvolvedora = Desenvolvedora.Desenvolvedora(conteudo[0], conteudo[1], conteudo[2], conteudo[3], conteudo[4], conteudo[5], conteudo[6])
@@ -193,7 +215,7 @@ class BancoDeDados:
 
     def removerDesenvolvedora(self, codigo):
         codigo = str(codigo)
-        self._cursor.execute('DELETE FROM desenvolvedoras WHERE codigo = ?', (codigo))
+        self._cursor.execute('DELETE FROM desenvolvedoras WHERE codigo = ?', (codigo,))
         self._conexao.commit()
 
     def inserirJogo(self, jogo):
@@ -212,26 +234,29 @@ class BancoDeDados:
         codigo = str(codigo)
         self._cursor.execute('SELECT * FROM jogos WHERE codigo = ?', (codigo,))
         conteudo = self._cursor.fetchone()
-        data_objeto = datetime.strptime(conteudo[4], '%Y-%m-%d %H:%M:%S')
-        data_formatada = data_objeto.strftime('%d/%m/%Y')
-        desenvolvedora = self.recuperarDesenvolvedora(conteudo[3])
-        if conteudo[10] == 'Acao':
-            jogo = Jogo.Acao(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
-        elif conteudo[10] == 'Aventura':
-            jogo = Jogo.Aventura(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
-        elif conteudo[10] == 'Corrida':
-            jogo = Jogo.Corrida(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
-        elif conteudo[10] == 'Esporte':
-            jogo = Jogo.Esporte(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
-        elif conteudo[10] == 'RPG':
-            jogo = Jogo.RPG(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
+        if conteudo != None:
+            data_objeto = datetime.strptime(conteudo[4], '%Y-%m-%d %H:%M:%S')
+            data_formatada = data_objeto.strftime('%d/%m/%Y')
+            desenvolvedora = self.recuperarDesenvolvedora(conteudo[3])
+            if conteudo[10] == 'Acao':
+                jogo = Jogo.Acao(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
+            elif conteudo[10] == 'Aventura':
+                jogo = Jogo.Aventura(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
+            elif conteudo[10] == 'Corrida':
+                jogo = Jogo.Corrida(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
+            elif conteudo[10] == 'Esporte':
+                jogo = Jogo.Esporte(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
+            elif conteudo[10] == 'RPG':
+                jogo = Jogo.RPG(conteudo[0], conteudo[1], conteudo[2], desenvolvedora, data_formatada, conteudo[5], conteudo[6], conteudo[7], conteudo[8], conteudo[9], conteudo[10])
 
-        return jogo
+            return jogo
+        else:
+            return None
 
 
     def recuperarJogos(self):
         self._cursor.execute('SELECT * FROM jogos')
-        conteudos =  self._cursor.fetchall()
+        conteudos = self._cursor.fetchall()
         jogos = []
         for conteudo in conteudos:
             data_objeto = datetime.strptime(conteudo[4], '%Y-%m-%d %H:%M:%S')
@@ -264,7 +289,7 @@ class BancoDeDados:
 
     def removerJogo(self, codigo):
         codigo = str(codigo)
-        self._cursor.execute('DELETE FROM jogos WHERE codigo = ?', (codigo))
+        self._cursor.execute('DELETE FROM jogos WHERE codigo = ?', (codigo,))
         self._conexao.commit()
 
     def inserirItemVenda(self, itemVenda):
@@ -277,10 +302,12 @@ class BancoDeDados:
         codigo = str(codigo)
         self._cursor.execute('SELECT * FROM itensVendas WHERE codigo = ?', (codigo,))
         conteudo =  self._cursor.fetchone()
-        produto = self.recuperarJogo(conteudo[1])
-        itemVenda = ItemVenda.ItemVenda(conteudo[0], produto, conteudo[2], conteudo[3])
-        return itemVenda
-
+        if conteudo != None:
+            produto = self.recuperarJogo(conteudo[1])
+            itemVenda = ItemVenda.ItemVenda(conteudo[0], produto, conteudo[2], conteudo[3])
+            return itemVenda
+        else:
+            return None
     def recuperarItensVendas(self):
         self._cursor.execute('SELECT * FROM itensVendas')
         conteudos =  self._cursor.fetchall()
@@ -292,7 +319,7 @@ class BancoDeDados:
         return itensVenda
 
     def removerItemVenda(self, codigo):
-        self._cursor.execute('DELETE FROM itensVendas WHERE codigo = ?', (codigo))
+        self._cursor.execute('DELETE FROM itensVendas WHERE codigo = ?', (codigo,))
         self._conexao.commit()
 
     def inserirVenda(self, venda):
@@ -324,7 +351,7 @@ class BancoDeDados:
 
     def recuperarVenda(self, codigo):
         codigo = str(codigo)
-        self._cursor.execute('SELECT * FROM vendas WHERE codigo = ?', (codigo))
+        self._cursor.execute('SELECT * FROM vendas WHERE codigo = ?', (codigo,))
         conteudo = self._cursor.fetchone()
         cliente = self.recuperarCliente(conteudo[1])
         gerente = self.recuperarGerente(conteudo[2])
@@ -354,6 +381,6 @@ class BancoDeDados:
         return vendas
 
     def removerVenda(self, codigo):
-        self._cursor.execute('DELETE FROM vendas WHERE codigo = ?', (codigo))
+        self._cursor.execute('DELETE FROM vendas WHERE codigo = ?', (codigo,))
         self.removerItemVenda(codigo)
         self._conexao.commit()

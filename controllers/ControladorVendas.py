@@ -17,6 +17,9 @@ class ControladorVendas:
         itemVenda = ItemVenda.ItemVenda(codigo, codigoProduto, valor, quantidade)
         return itemVenda
 
+    def recuperarPagamento(self, codigo, formaPagamento):
+        return self.__bancodedados.recuperarFormaPagamento(codigo, formaPagamento)
+
     def inserirItemVenda(self, itemVenda):
         self.__bancodedados.inserirItemVenda(itemVenda)
         self.__sistema.atualizarDados()

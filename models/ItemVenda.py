@@ -6,7 +6,7 @@ class ItemVenda:
         self.__quantidade = quantidade
 
     def calcularTotal(self):
-        return self.__valor * self.__quantidade
+        return float(self.__valor) * int(self.__quantidade)
 
     #Getter's e Setter's
 
